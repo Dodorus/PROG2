@@ -10,6 +10,8 @@ Der User kann sich Vorschläge für Rezepte einholen. (Seite 3)
 
 Der User kann seine Produkte verändern oder etwas neues bestellen. (Seite 4).
 
+![alt text](https://github.com/Dodorus/PROG2/blob/master/pages.png)
+
 *** copyy ***
 
 *** goals ***
