@@ -1,20 +1,32 @@
-<!DOCTYPE html>
-<html lang="de">
-    <head>
-        <meta charset="utf-8">
-        <title>Hello</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-    </head>
-    <body>
-        <nav>
-            <ul>
-                <li><a href="Startseite">Startseite</a></li>
-                <li><a href="Warenkorb">Warenkorb</a></li>
-                <li><a href="Mein_Profil">Mein Profil</a></li>
-            </ul>
-        </nav>
+{% extends "bootstrap/base.html" %}
 
-        <h1>Hallo {{ name }}!</h1>
-        <a href="{{ url_for('test')}}">Weiter zur nächsten Seite..</a>
-    </body>
-</html>
+{% block navbar %}
+{{ nav.my_navbar.render() }}
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1>Welcome auf der Seite</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+          One of three columns
+        </div>
+        <div class="col-6">
+          One of three columns
+        </div>
+        <div class="col-2">
+          One of three columns
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<!-- Hier spezielle Scripts -->
+{% endblock %}
