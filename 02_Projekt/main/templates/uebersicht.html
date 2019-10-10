@@ -1,12 +1,16 @@
 {% extends "bootstrap/base.html" %}
-
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+{% endblock %}
 {% block navbar %}
 {{ nav.my_navbar.render() }}
 {% endblock %}
 
 
 {% block content %}
-<h1>Hello</h1>
+<div class="container-fluid">
+</div>
 {% endblock %}
 
 {% block scripts %}
