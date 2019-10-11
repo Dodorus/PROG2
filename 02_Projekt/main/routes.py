@@ -1,8 +1,8 @@
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect, request
+from flask_login import login_user, current_user, logout_user, login_required
 from main import app, db, bcrypt
 from main.forms import RegistrationForm, LoginForm
 from main.models import benutzer_k, aufgaben
-from flask_login import login_user, current_user, logout_user
 
 
 @app.route("/")
@@ -36,7 +36,8 @@ def login():
 		user = benutzer_k.query.filter_by(email_econ=form.email.data).first()
 		if user and bcrypt.check_password_hash(user.password_econ, form.password.data):
 			login_user(user, remember=form.remember.data)
-			return redirect(url_for('index'))
+			next_page = request.args.get('next')
+			return redirect(next_page) if next_page else redirect(url_for('index'))
 		else:
 			flash('Überprüfe E-Mail und Password.', "danger")
 	return render_template("login.html", title="Login", form=form)
@@ -45,3 +46,10 @@ def login():
 def logout():
 	logout_user()
 	return redirect(url_for('index'))
+
+@app.route("/account")
+@login_required
+def account():
+	return render_template("account.html", title="Account")
+
+
