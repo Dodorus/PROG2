@@ -2,6 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from main import app, db, bcrypt
 from main.forms import RegistrationForm, LoginForm
 from main.models import benutzer_k, aufgaben
+from flask_login import login_user, current_user, logout_user
 
 
 @app.route("/")
@@ -14,6 +15,8 @@ def uebersicht():
 
 @app.route("/registrieren", methods=['GET', "POST"])
 def registrieren():
+	if current_user.is_authenticated:
+		return redirect(url_for('index'))
 	form = RegistrationForm()
 	if form.validate_on_submit():
 		hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -26,11 +29,19 @@ def registrieren():
 
 @app.route("/login", methods=['GET', "POST"])
 def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('index'))
 	form = LoginForm()
 	if form.validate_on_submit():
-		if form.email.data == 'dominic-kunz@hotmail.com' and form.password.data == "password":
-			flash("You have been logged in!", "success")
+		user = benutzer_k.query.filter_by(email_econ=form.email.data).first()
+		if user and bcrypt.check_password_hash(user.password_econ, form.password.data):
+			login_user(user, remember=form.remember.data)
 			return redirect(url_for('index'))
 		else:
-			flash('Login Unsuccessful. Pleas try again.', "danger")
+			flash('Überprüfe E-Mail und Password.', "danger")
 	return render_template("login.html", title="Login", form=form)
+
+@app.route("/logout")
+def logout():
+	logout_user()
+	return redirect(url_for('index'))

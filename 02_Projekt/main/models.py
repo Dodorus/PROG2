@@ -1,7 +1,13 @@
 from datetime import datetime
-from main import db
+from main import db, login_manager
+from flask_login import UserMixin
 
-class benutzer_k(db.Model):
+@login_manager.user_loader
+
+def load_user(user_id):
+	return benutzer_k.query.get(int(user_id))
+
+class benutzer_k(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	name_econ = db.Column(db.String(20), unique=True, nullable=False)
 	email_econ = db.Column(db.String(120), unique=True, nullable=False)
