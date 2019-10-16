@@ -1,9 +1,9 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, jsonify, make_response
 from flask_login import login_user, current_user, logout_user, login_required
 from main import app, db, bcrypt
 from main.forms import RegistrationForm, LoginForm
 from main.models import benutzer_k, aufgaben
-
+from datetime import datetime
 
 @app.route("/")
 def index():
@@ -52,4 +52,12 @@ def logout():
 def account():
 	return render_template("account.html", title="Account")
 
+@app.route("/json", methods=["POST"])
+def json():
 
+	req = request.get_json()
+	
+	daten = {
+		"name": "JSONDAT",
+		"name": req.get("name")
+	}

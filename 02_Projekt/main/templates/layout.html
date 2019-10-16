@@ -1,15 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!-- Conteey CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+<head>
+  <meta charset="utf-8">
 
     <!-- Title -->
     {% if title %}
@@ -18,35 +11,60 @@
       <title>conteey - easy</title>
     {% endif %}
 
-  </head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
 
-  <!-- Body -->
-  <body>
-  <header>
-    <nav class="navbar navbar-expand-md navbar-dark">
-      <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="{{ url_for('index') }}">Home</a>
-        </li>
-        <li class="nav-item">
-          {% if current_user.is_authenticated %}
-          <a class="nav-link" href="{{ url_for('account') }}">Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-          {% else %}
-          <a class="nav-link" href="{{ url_for('registrieren') }}">Registrieren</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-          {% endif %}
-        </li>
-      </ul>
-    </nav>
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700|Roboto:400,900" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- Page Content
+    ================================================== -->
+  <!-- Header -->
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <a href="{{ url_for('index') }}"><img src="img/logo-nav.png" alt="" title="" /></img></a>
+        <!-- Uncomment below if you prefer to use a text image -->
+        <!--<h1><a href="#hero">Bell</a></h1>-->
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li><a href="{{ url_for('account') }}">Account</a></li>
+          <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          <li><a href="{{ url_for('logout') }}">Registrieren</a></li>
+          <li><a href="{{ url_for('logout') }}">Login</a></li>
+        </ul>
+      </nav>
+      <!-- #nav-menu-container -->
+
+      <nav class="nav social-nav pull-right d-none d-lg-inline">
+        <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
+      </nav>
+    </div>
   </header>
+  <!-- #header -->
 
-    <div class="container-fluid">
-    <div class="row top-margin-50">
+  <!-- BODY -->
+  <body>
+    <div class="container">
       {% with messages = get_flashed_messages(with_categories=true) %}
        {% if messages %}
         {% for category, message in messages %}
@@ -56,19 +74,76 @@
         {% endfor %}
        {% endif %}
       {% endwith %}
-    </div>
+
+
 
       {% block content %}{% endblock %}
-
     </div>
 
-    <!-- Optional JS end of Body -->
+  <!-- Optional JS end of Body -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
+  
+  <!-- /About -->
 
-  <!-- Footer -->
-  <footer>
+  <footer class="site-footer">
+    <div class="bottom">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-6 col-xs-12 text-lg-left text-center">
+            <p class="copyright-text">
+              by Dominic Kunz
+            </p>
+            <div class="credits">
+             Designed by dk
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-xs-12 text-lg-right text-center">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="{{ url_for('index') }}">Home</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="{{ url_for('account') }}">Account</a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="{{ url_for('logout') }}">Logout</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </footer>
+  <a class="scrolltop" href="#"><span class="fa fa-angle-up"></span></a>
+
+
+  <!-- Required JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+  <script src="lib/tether/js/tether.min.js"></script>
+  <script src="lib/stellar/stellar.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/easing/easing.js"></script>
+  <script src="lib/stickyjs/sticky.js"></script>
+  <script src="lib/parallax/parallax.js"></script>
+  <script src="lib/lockfixed/lockfixed.min.js"></script>
+
+  <!-- Template Specisifc Custom Javascript File -->
+  <script src="js/custom.js"></script>
+
+  <script src="contactform/contactform.js"></script>
+
+</body>
 </html>
