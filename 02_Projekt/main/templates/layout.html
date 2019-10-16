@@ -28,11 +28,11 @@
   <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="/static/css/main.css" rel="stylesheet">
 
 </head>
 
-<body>
+<body style="background: black;">
   <!-- Page Content
     ================================================== -->
   <!-- Header -->
@@ -40,9 +40,7 @@
     <div class="container">
 
       <div id="logo" class="pull-left">
-        <a href="{{ url_for('index') }}"><img src="img/logo-nav.png" alt="" title="" /></img></a>
-        <!-- Uncomment below if you prefer to use a text image -->
-        <!--<h1><a href="#hero">Bell</a></h1>-->
+        <a href="{{ url_for('index') }}"><img src="/static/img/logo-nav.png" alt="" title="" /></img></a>
       </div>
 
       <nav id="nav-menu-container">
