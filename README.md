@@ -1,6 +1,6 @@
 # Feedme
 
-Aus verschiedenen, auch selber zusammengestellten Menüs, auswählen. Am Schluss erhält man eine Einkaufsliste von was man genau wie viel benötigt.
+Aus verschiedenen, auch selber zusammengestellten Menüs, auswählen. Am Schluss erhält man eine Einkaufsliste von welchen Zutaten man was genau benötigt.
 
 ## Start
 
