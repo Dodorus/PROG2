@@ -1,21 +1,25 @@
-*** coopyy ***
+# Feedme
 
-Ein System erkennt, wann Esswaren knapp werden. Diese Daten werden in eine Datenbank geschrieben, welche für dieses Projekt allerdings manuell angelegt werden.
+Aus verschiedenen, auch selber zusammengestellten Menüs, auswählen. Am Schluss erhält man eine Einkaufsliste von was man genau wie viel benötigt.
 
-Der User kann seine Waren also manuell einstellen. (Seite 1)
+## Start
 
-Der User kann auslesen, wie viele Waren er noch verfügbar hat. (Seite 2)
+Anhand von Datenbanken (für Logins) und CSV Sheets ein System entwickeln, welches die definierten Anforderungen erfüllt.
 
-Der User kann sich Vorschläge für Rezepte einholen. (Seite 3)
+## Anforderungen
 
-Der User kann seine Produkte verändern oder etwas neues bestellen. (Seite 4).
+- Einloggen, Registrieren und Abmelden
+- Eigene Menüs erfassen und speichern
+- Menüs zusammentragen und eine "Einkaufsliste" ausgeben, mit den genauen Mengen
 
 ![alt text](https://github.com/Dodorus/PROG2/blob/master/pages.png)
 
-*** copyy ***
+## Mögliche Navigation
 
-*** goals ***
+Home, Menüs, Eigene Menüs erfassen, Warenkorb, Registrieren/Anmelden/Logout
 
-1. Ziel: Webapp mit Navigation schreiben. Insgesamt 4 Seiten, oben beschrieben.
+## Ziele
+
+1. Ziel: Webapp mit Navigation schreiben.
 2. Ziel: Datenbank oder CSV aufsetzen und Daten manuell eintragen.
 3. Ziel: 
