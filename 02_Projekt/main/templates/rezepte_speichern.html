@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Welcome auf der Seite</h1>
+        </div>
+        <div class="col-8">
+        	<p>Welcome auf dieser super Rezeptseite wo es dir alles direkt anzeigt. alles einfach.</p>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-6">
+    		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Jetzt Rezept speichern</legend>
+				<dir class="form-group">
+					{{ form.rezeptName.label(class="form-control-label" )}}
+					{{ form.rezeptName(class="form-control form-control-lg") }}
+				</dir>
+				<dir class="form-group">
+					{{ form.zutat1.label(class="form-control-label" )}}
+					{{ form.zutat1(class="form-control form-control-lg") }}
+				</dir>
+			</fieldset>
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+			</form>
+			<ul>
+			{% for ding in R_name %}
+            	<li>{{ ding }}</li>
+        	{% endfor %}
+    		</ul>
+    	</div>
+    </div>
+{% endblock content %}
