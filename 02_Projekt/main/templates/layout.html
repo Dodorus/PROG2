@@ -16,25 +16,20 @@
   <meta content="" name="description">
 
   <!-- Favicon -->
-  <link href="img/favicon.ico" rel="icon">
+  <link href="/static/img/favicon.ico" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700|Roboto:400,900" rel="stylesheet">
 
   <!-- Bootstrap CSS File -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!-- Libraries CSS Files -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/static/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- Main Stylesheet File -->
-  <link href="/static/css/main.css" rel="stylesheet">
-
+  <link href="/static/css/main.css" rel="stylesheet"= -->
 </head>
-
-<body style="background: black;">
-  <!-- Page Content
-    ================================================== -->
   <!-- Header -->
   <header id="header">
     <div class="container">
@@ -47,8 +42,8 @@
         <ul class="nav-menu">
           <li><a href="{{ url_for('account') }}">Account</a></li>
           <li><a href="{{ url_for('logout') }}">Logout</a></li>
-          <li><a href="{{ url_for('logout') }}">Registrieren</a></li>
-          <li><a href="{{ url_for('logout') }}">Login</a></li>
+          <li><a href="{{ url_for('registrieren') }}">Registrieren</a></li>
+          <li><a href="{{ url_for('login') }}">Login</a></li>
         </ul>
       </nav>
       <!-- #nav-menu-container -->
@@ -124,24 +119,24 @@
 
 
   <!-- Required JavaScript Libraries -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/jquery/jquery-migrate.min.js"></script>
-  <script src="lib/superfish/hoverIntent.js"></script>
-  <script src="lib/superfish/superfish.min.js"></script>
-  <script src="lib/tether/js/tether.min.js"></script>
-  <script src="lib/stellar/stellar.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="lib/counterup/counterup.min.js"></script>
-  <script src="lib/waypoints/waypoints.min.js"></script>
-  <script src="lib/easing/easing.js"></script>
-  <script src="lib/stickyjs/sticky.js"></script>
-  <script src="lib/parallax/parallax.js"></script>
-  <script src="lib/lockfixed/lockfixed.min.js"></script>
+  <script src="/static/lib/jquery/jquery.min.js"></script>
+  <script src="/static/lib/jquery/jquery-migrate.min.js"></script>
+  <script src="/static/lib/superfish/hoverIntent.js"></script>
+  <script src="/static/lib/superfish/superfish.min.js"></script>
+  <script src="/static/lib/tether/js/tether.min.js"></script>
+  <script src="/static/lib/stellar/stellar.min.js"></script>
+  <script src="/static/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/lib/counterup/counterup.min.js"></script>
+  <script src="/static/lib/waypoints/waypoints.min.js"></script>
+  <script src="/static/lib/easing/easing.js"></script>
+  <script src="/static/lib/stickyjs/sticky.js"></script>
+  <script src="/static/lib/parallax/parallax.js"></script>
+  <script src="/static/lib/lockfixed/lockfixed.min.js"></script>
 
   <!-- Template Specisifc Custom Javascript File -->
-  <script src="js/custom.js"></script>
+  <script src="/static/js/custom.js"></script>
 
-  <script src="contactform/contactform.js"></script>
+  <script src="/static/contactform/contactform.js"></script>
 
 </body>
 </html>
