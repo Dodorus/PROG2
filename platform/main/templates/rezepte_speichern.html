@@ -9,29 +9,101 @@
         </div>
     </div>
     <div class="row">
-    	<div class="col-6">
+    	<div class="col-8">
     		<form method="POST" action="">
 			{{ form.hidden_tag() }}
-			<fieldset class="form-group">
-				<legend class="border-bottom mb-4">Jetzt Rezept speichern</legend>
-				<dir class="form-group">
+			<div class="form-row">
+				<legend class="border-bottom md-8">Jetzt Rezept speichern</legend>
+				<dir class="form-group col-md-12">
 					{{ form.rezeptName.label(class="form-control-label" )}}
 					{{ form.rezeptName(class="form-control form-control-lg") }}
 				</dir>
-				<dir class="form-group">
+
+				<dir class="form-group col-md-4">
 					{{ form.zutat1.label(class="form-control-label" )}}
-					{{ form.zutat1(class="form-control form-control-lg") }}
+					{{ form.zutat1(class="form-control form-control-md") }}
 				</dir>
-			</fieldset>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM1.label(class="form-control-label" )}}
+					{{ form.zutatM1(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat2.label(class="form-control-label" )}}
+					{{ form.zutat2(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM2.label(class="form-control-label" )}}
+					{{ form.zutatM2(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat3.label(class="form-control-label" )}}
+					{{ form.zutat3(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM3.label(class="form-control-label" )}}
+					{{ form.zutatM3(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat4.label(class="form-control-label" )}}
+					{{ form.zutat4(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM4.label(class="form-control-label" )}}
+					{{ form.zutatM4(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat5.label(class="form-control-label" )}}
+					{{ form.zutat5(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM5.label(class="form-control-label" )}}
+					{{ form.zutatM5(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat6.label(class="form-control-label" )}}
+					{{ form.zutat6(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM6.label(class="form-control-label" )}}
+					{{ form.zutatM6(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat7.label(class="form-control-label" )}}
+					{{ form.zutat7(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM8.label(class="form-control-label" )}}
+					{{ form.zutatM8(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat9.label(class="form-control-label" )}}
+					{{ form.zutat9(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM9.label(class="form-control-label" )}}
+					{{ form.zutatM9(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat10.label(class="form-control-label" )}}
+					{{ form.zutat10(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-6">
+					{{ form.zutatM10.label(class="form-control-label" )}}
+					{{ form.zutatM10(class="form-control form-control-md") }}
+				</dir>
+			</div>
 			<div class="form-group">
 				{{ form.submit(class="btn btn-outline-info") }}
 			</div>
 			</form>
-			<ul>
-			{% for ding in R_name %}
-            	<li>{{ ding }}</li>
-        	{% endfor %}
-    		</ul>
     	</div>
     </div>
 {% endblock content %}

@@ -33,34 +33,5 @@ class LoginForm(FlaskForm):
 
 class RezeptErfassen(FlaskForm):
 	rezeptName = StringField('Name', validators=[DataRequired()])
-	zutat1 = StringField('Erste Zutat', validators=[DataRequired()])
-	zutatM1 = StringField('Menge (bsp: 100,g oder 3,kg)', validators=[DataRequired()])
-	
-	zutat2 = StringField('nächste Zutat')
-	zutatM2 = StringField('Menge')
-
-	zutat3 = StringField('nächste Zutat')
-	zutatM3 = StringField('Menge')
-
-	zutat4 = StringField('nächste Zutat')
-	zutatM4 = StringField('Menge')
-
-	zutat5 = StringField('nächste Zutat')
-	zutatM5 = StringField('Menge')
-
-	zutat6 = StringField('nächste Zutat')
-	zutatM6 = StringField('Menge')
-
-	zutat7 = StringField('nächste Zutat')
-	zutatM7 = StringField('Menge')
-
-	zutat8 = StringField('nächste Zutat')
-	zutatM8 = StringField('Menge')
-
-	zutat9 = StringField('nächste Zutat')
-	zutatM9 = StringField('Menge')
-
-	zutat10 = StringField('nächste Zutat')
-	zutatM10 = StringField('Menge')
-	
+	zutat1 = StringField('Zutat 1', validators=[DataRequired()])
 	submit = SubmitField('Rezept speichern')

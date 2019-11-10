@@ -55,63 +55,15 @@ def rezepte():
 	rezeptload = daten.load_values()
 	rl = rezeptload["rezepte"]
 
-	list_uebergabe_rl = {}
-	for d in rl:
-		for key, value in d.items():
-			if key == "name":
-				list_uebergabe_rl_string = value + ": '{"
-
-			elif key == "zutaten":
-				for zut_name, zut_wert in d["zutaten"].items():
-					zut_wert = zut_wert.replace(",", " ")
-					
-					list_uebergabe_rl_string = list_uebergabe_rl_string + "[" + zut_name + "," + zut_wert + "],"
-				list_uebergabe_rl_string = list_uebergabe_rl_string + "}'"
-
-
-
-	return render_template("rezepte.html", title="Rezepte", rl=rl, list_uebergabe_rl_string=list_uebergabe_rl_string)
+	return render_template("rezepte.html", title="Rezepte", rl=rl)
 
 @app.route("/rezepte/rezepte_speichern", methods=["GET", "POST"])
 @login_required
 def rezepte_speichern():
 	form = RezeptErfassen()
-	list_zutaten = {1,2,3,4,5,6,7,8,9,10}
 	if form.validate_on_submit():
 		R_name = form.rezeptName.data
-
 		zutat_1 = form.zutat1.data
-		zutatM_1 = form.zutatM1.data
-
-		zutat_2 = form.zutat2.data
-		zutatM_2 = form.zutatM2.data
-
-		zutat_3 = form.zutat3.data
-		zutatM_3 = form.zutatM3.data
-
-		zutat_4 = form.zutat4.data
-		zutatM_4 = form.zutatM1.data
-
-		zutat_5 = form.zutat5.data
-		zutatM_5 = form.zutatM5.data
-
-		zutat_6 = form.zutat6.data
-		zutatM_6 = form.zutatM6.data
-
-		zutat_7 = form.zutat7.data
-		zutatM_7 = form.zutatM7.data
-
-		zutat_8 = form.zutat8.data
-		zutatM_8 = form.zutatM8.data
-
-		zutat_9 = form.zutat9.data
-		zutatM_9 = form.zutatM9.data
-
-		zutat_10 = form.zutat10.data
-		zutatM_10 = form.zutatM10.data
-
-		#dict liste machen, werte speichern
-		list_zutaten = {zutat_1: zutatM_1, zutat_2: zutatM_2, zutat_3: zutatM_3, zutat_4: zutatM_4, zutat_5: zutatM_5, zutat_6: zutatM_6, zutat_7: zutatM_7, zutat_8: zutatM_8, zutat_9: zutatM_9, zutat_10: zutatM_10}
 
 		def speichern(datei, key, Rname, zutat1):
 		    try:
@@ -125,7 +77,9 @@ def rezepte_speichern():
 		    datei_inhalt['rezepte'].append({
 		    	"id": str(key),
 		    	"name": Rname,
-		    	"zutaten": list_zutaten
+		    	"zutaten": {
+		    		"1": zutat1,
+		    	}
 		    })
 		    print(datei_inhalt)
 
@@ -142,4 +96,4 @@ def rezepte_speichern():
 		aktivitaet_speichern(R_name, zutat_1)
 
 
-	return render_template("rezepte_speichern.html", title="Rezepte erfassen", form=form, list_zutaten=list_zutaten)
+	return render_template("rezepte_speichern.html", title="Rezepte erfassen", form=form)

@@ -5,27 +5,37 @@
             <h1>Welcome auf der Seite</h1>
         </div>
         <div class="col-8">
-        	<p>Welcome auf dieser super Rezeptseite wo es dir alles direkt anzeigt. alles einfach.</p>
+            <p>Welcome auf dieser super Rezeptseite wo es dir alles direkt anzeigt. alles einfach.</p>
         </div>
     </div>
     <div class="row">
-    	<div class="col-6">
-    		<a href="{{ url_for('rezepte_speichern') }}" ><button type="button" class="btn btn-secondary">Ein neues Rezept speichern..</button></a>
-    	</div>
+        <div class="col-6">
+            <a href="{{ url_for('rezepte_speichern') }}" ><button type="button" class="btn btn-secondary">Ein neues Rezept speichern..</button></a>
+        </div>
     </div>
     <div class="row">
-    	<div class="col-12">
-    		{% for d in rl %}
-    			{% for key, value in d.items() %}
-    			{% if key == "name" %}
-    				<h3>{{ value }}</h3>
-				{% elif key == "zutaten" %}
-					{% for zut_key, zut_value in d["zutaten"].items() %}
-						{{ zut_value }}
-					{% endfor %}
-				{% endif %}
-    			{% endfor %}
-    		{% endfor %}
-    	</div>
+        <div class="col-7" style="margin-top:50px;">
+            {% for d in rl %}
+                {% for key, value in d.items() %}
+
+                <table class="table table-borderless">
+                {% if key == "name" %}
+                    <h3 style="margin-top:20px;">{{ value }}</h3>
+                {% elif key == "zutaten" %}
+                    <tbody>
+                    {% for zut_key, zut_value in d["zutaten"].items() %}
+                        <tr><td>{{ zut_key }}</td><td>
+                        {% autoescape false %}
+                          {{ zut_value | replace(",", " ") }}
+                        {% endautoescape %}
+                        </td></tr>
+                    {% endfor %}
+                    </tbody>
+                {% endif %}
+                </table>
+
+                {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock content %}
