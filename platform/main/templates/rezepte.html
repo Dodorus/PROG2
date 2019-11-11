@@ -13,29 +13,35 @@
             <a href="{{ url_for('rezepte_speichern') }}" ><button type="button" class="btn btn-secondary">Ein neues Rezept speichern..</button></a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-7" style="margin-top:50px;">
+    <div class="row" style="margin-top:30px;">
+        <div class="col-4">
             {% for d in rl %}
                 {% for key, value in d.items() %}
 
-                <table class="table table-borderless">
                 {% if key == "name" %}
-                    <h3 style="margin-top:20px;">{{ value }}</h3>
+                <h3 style="margin-top:20px;">{{ value }}</h3>
+                
                 {% elif key == "zutaten" %}
-                    <tbody>
                     {% for zut_key, zut_value in d["zutaten"].items() %}
-                        <tr><td>{{ zut_key }}</td><td>
+                        <span>{{ zut_key }}
+                        </span>
+                        </span>
                         {% autoescape false %}
                           {{ zut_value | replace(",", " ") }}
                         {% endautoescape %}
-                        </td></tr>
+                        </span>
                     {% endfor %}
-                    </tbody>
-                {% endif %}
-                </table>
+        </div>
+        <div class="col-4">
+                {% elif key == "img" %}
+                <img class="col-4" src="../static/img/rzp_images/{{ value }}" alt="{{ key }}" />
+        </div>
 
+                {% endif %}
                 {% endfor %}
             {% endfor %}
+        <div class="col-4">
+        </div>
         </div>
     </div>
 {% endblock content %}

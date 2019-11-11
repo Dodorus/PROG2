@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from flask_wtf.file import FileField, FileAllowed
 from main.models import benutzer_k
 
 #Hier kommen Klassen für Formulare
@@ -33,6 +34,9 @@ class LoginForm(FlaskForm):
 
 class RezeptErfassen(FlaskForm):
 	rezeptName = StringField('Name', validators=[DataRequired()])
+	
+	rezeptBild = FileField(u'Bild des Rezepts oder des Menues', validators=[FileAllowed(['jpg', 'png'])])
+
 	zutat1 = StringField('Erste Zutat', validators=[DataRequired()])
 	zutatM1 = StringField('Menge (bsp: 100,g oder 3,kg)', validators=[DataRequired()])
 	

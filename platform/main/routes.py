@@ -68,8 +68,6 @@ def rezepte():
 					list_uebergabe_rl_string = list_uebergabe_rl_string + "[" + zut_name + "," + zut_wert + "],"
 				list_uebergabe_rl_string = list_uebergabe_rl_string + "}'"
 
-
-
 	return render_template("rezepte.html", title="Rezepte", rl=rl, list_uebergabe_rl_string=list_uebergabe_rl_string)
 
 @app.route("/rezepte/rezepte_speichern", methods=["GET", "POST"])
@@ -79,6 +77,10 @@ def rezepte_speichern():
 	list_zutaten = {1,2,3,4,5,6,7,8,9,10}
 	if form.validate_on_submit():
 		R_name = form.rezeptName.data
+
+		if form.rezeptBild.data:
+			picture_file = daten.save_pictures(form.rezeptBild.data)
+			pic = picture_file
 
 		zutat_1 = form.zutat1.data
 		zutatM_1 = form.zutatM1.data
@@ -125,6 +127,7 @@ def rezepte_speichern():
 		    datei_inhalt['rezepte'].append({
 		    	"id": str(key),
 		    	"name": Rname,
+		    	"img" : pic,
 		    	"zutaten": list_zutaten
 		    })
 		    print(datei_inhalt)

@@ -10,13 +10,23 @@
     </div>
     <div class="row">
     	<div class="col-8">
-    		<form method="POST" action="">
+    		<form method="POST" action="" enctype="multipart/form-data">
 			{{ form.hidden_tag() }}
 			<div class="form-row">
 				<legend class="border-bottom md-8">Jetzt Rezept speichern</legend>
 				<dir class="form-group col-md-12">
 					{{ form.rezeptName.label(class="form-control-label" )}}
 					{{ form.rezeptName(class="form-control form-control-lg") }}
+				</dir>
+
+				<dir class="form-group col-md-12">
+					{{ form.rezeptBild.label()}}
+					{{ form.rezeptBild(class="form-control-file") }}
+					{% if form.rezeptBild.errors %}
+						{% for error in form.rezeptBild.errors %}
+							<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					{% endif %}
 				</dir>
 
 				<dir class="form-group col-md-4">
