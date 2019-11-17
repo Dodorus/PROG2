@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,19 +6,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-        <!-- Title -->
-    {% if title %}
-      <title>conteey</title>
-    {% else %}
-      <title>conteey - easy</title>
-    {% endif %}
+    <!-- Title -->
+    <title>Rezäptbay</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbar-fixed/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="navbar-top-fixed.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -65,10 +61,11 @@
 
     <!-- Bootstrap und so laden -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://unpkg.com/popper.js"></script>
     <script src="https://unpkg.com/tooltip.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {% block javascript %}{% endblock %}
   </body>
 </html>

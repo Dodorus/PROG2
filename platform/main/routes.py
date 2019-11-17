@@ -1,8 +1,8 @@
-from flask import render_template, url_for, flash, redirect, request, jsonify, make_response
+from flask import render_template, url_for, flash, redirect, request, jsonify, make_response, session
 from flask_login import login_user, current_user, logout_user, login_required
 from main import app, db, bcrypt, daten
 from main.forms import RegistrationForm, LoginForm, RezeptErfassen
-from main.models import benutzer_k, aufgaben
+from main.models import benutzer_k, aufgaben, load_user
 from datetime import datetime
 import main.daten
 import json
@@ -54,21 +54,72 @@ def logout():
 def rezepte():
 	rezeptload = daten.load_values()
 	rl = rezeptload["rezepte"]
+	user_session = load_user(session["user_id"])
+	for t,user_id in session.items():
+		if t == "user_id":
+			user_id = user_id
 
-	list_uebergabe_rl = {}
-	for d in rl:
-		for key, value in d.items():
-			if key == "name":
-				list_uebergabe_rl_string = value + ": '{"
+	return render_template("rezepte.html", title="Rezepte", rl=rl, user_id=user_id)
 
-			elif key == "zutaten":
-				for zut_name, zut_wert in d["zutaten"].items():
-					zut_wert = zut_wert.replace(",", " ")
-					
-					list_uebergabe_rl_string = list_uebergabe_rl_string + "[" + zut_name + "," + zut_wert + "],"
-				list_uebergabe_rl_string = list_uebergabe_rl_string + "}'"
+@app.route('/background_process/<name>', methods=['GET', 'POST'])
+def background_process(name=False):
+	name = name.split(",")
+	id_1 = name[0]
+	name_1 = name[1]
+	date = datetime.now()
+	klicked = "klicked"
+	gefunden = False
 
-	return render_template("rezepte.html", title="Rezepte", rl=rl, list_uebergabe_rl_string=list_uebergabe_rl_string)
+	datei_ver = 'rezepte_verwaltung.json'
+	datei_inhalt_ver = daten.load_json(datei_ver)
+
+	for a in datei_inhalt_ver['rezepte_verwaltung']:
+		if gefunden == False:
+			for b,c in a.items():
+				if gefunden == False:
+					if b == name_1:
+						if c["status"] == "klicked":
+							c["status"] = "unklicked"
+							gefunden = True
+							break
+						elif c["status"] == "unklicked":
+							c["status"] = "klicked"
+							gefunden = True
+							break
+						else:
+							print("else")
+							break
+					elif gefunden == True:
+						break
+					else:
+						datei_inhalt_ver['rezepte_verwaltung'].append({
+							name_1: {
+							"id_of_user": id_1,
+							"timestamp": str(date),
+							"status": klicked
+							}
+						})
+						gefunden = True
+						break
+				else:
+					print("else")
+					break
+		else:
+			print("else")
+			break
+
+	daten.save_json(datei_ver, datei_inhalt_ver)
+"""
+		
+
+	daten.save_json(datei_ver, datei_inhalt_ver)
+"""
+
+		
+
+
+	
+	
 
 @app.route("/rezepte/rezepte_speichern", methods=["GET", "POST"])
 @login_required
@@ -126,8 +177,8 @@ def rezepte_speichern():
 		    #datei_inhalt['rezepte'] = []
 		    datei_inhalt['rezepte'].append({
 		    	"id": str(key),
-		    	"name": Rname,
 		    	"img" : pic,
+		    	"name": Rname,
 		    	"zutaten": list_zutaten
 		    })
 		    print(datei_inhalt)

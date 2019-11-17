@@ -1,47 +1,111 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="row">
-        <div class="col-12">
-            <h1>Welcome auf der Seite</h1>
+        <div class="col-12" id="user_id" name ="{{ user_id }}">
+            <h1>Rezepte suchen und finden</h1>
         </div>
         <div class="col-8">
-            <p>Welcome auf dieser super Rezeptseite wo es dir alles direkt anzeigt. alles einfach.</p>
+            <p>Suche dir leckere Rezepte aus und markiere sie per Button oben rechts. Dannach kannst du dir unter "Meine Woche", alle Menüs in der Übersicht anschauen und dirket einsehen was und wie viel du genau kaufen musst.</p>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
+        <div class="col-4" style="margin-top:20px;">
             <a href="{{ url_for('rezepte_speichern') }}" ><button type="button" class="btn btn-secondary">Ein neues Rezept speichern..</button></a>
         </div>
     </div>
-    <div class="row" style="margin-top:30px;">
-        <div class="col-4">
-            {% for d in rl %}
-                {% for key, value in d.items() %}
+    <!-- Grid row -->
 
-                {% if key == "name" %}
-                <h3 style="margin-top:20px;">{{ value }}</h3>
+    {% for d in rl %}
+        <div class="row" style="margin-bottom:20px;">
+
+            <!-- Grid column -->
+            <div class="col-lg-7 col-md-12">
+
+            <!--Card Wider-->
+            <div class="card card-cascade wider">
+              <!--Card image-->
+                <img src="../static/img/rzp_images/{{ d.img }}" class="card-img-top" alt="wider">
+                <div class="card-img-overlay text-right">
+            
+                    <button name="{{ d.id }}" class="btn critical_btn btn-secondary">+</button>
+                </div>
+              <!--/Card image-->
+
+              <!--Card content-->
+              <div class="card-body card-body-cascade text-center">
+                <!--Title-->
+             
+                <h4 class="card-title"><strong>{{ d.name }}</strong></h4>
+              
+                <h6 class="indigo-text"><strong>Zutaten</strong></h6>
+
                 
-                {% elif key == "zutaten" %}
-                    {% for zut_key, zut_value in d["zutaten"].items() %}
-                        <span>{{ zut_key }}
+                    <p class="card-text" style="text-align:center;">
+                        {% for e,f in d.zutaten.items() %}
+                        <span>{% autoescape false %}
+                                {{ f | replace(",", " ") }}
+                                {% endautoescape %}
                         </span>
-                        </span>
-                        {% autoescape false %}
-                          {{ zut_value | replace(",", " ") }}
-                        {% endautoescape %}
-                        </span>
-                    {% endfor %}
-        </div>
-        <div class="col-4">
-                {% elif key == "img" %}
-                <img class="col-4" src="../static/img/rzp_images/{{ value }}" alt="{{ key }}" />
-        </div>
+                        <span>
+                            {{ e }}
+                        </span><br />
+                        {% endfor %}
+                    </p>
 
-                {% endif %}
-                {% endfor %}
-            {% endfor %}
-        <div class="col-4">
+              </div>
+              <!--/.Card content-->
+
+            </div>
+            <!--/.Card Wider-->
+
+            </div>
         </div>
-        </div>
-    </div>
+        {% endfor %}
+
+  <!-- Grid column -->
 {% endblock content %}
+{% block javascript %}
+  <script>
+
+    $(".critical_btn").click(function() {
+      $(this).toggleClass('btn-success');
+    });
+
+    $(function() {
+        $(".critical_btn").click(function() {
+
+            var user_id = $('#user_id').attr('name');
+            var name = this.name;
+
+            var urlToCall = '/background_process/' + user_id + "," + name;
+
+            $.ajax({
+                url: urlToCall,
+                type: "GET",
+            });
+            ajax.reload()
+        });
+    });
+        // Neue Idee
+        /*
+        $.ajax({
+            url: '../static/rezepte_verwaltung.json',
+            dataType: 'json',
+            type: 'get',
+            cache: 'false',
+            success: function(data){
+                //$(data.rezepte_verwaltung).each(function(index, value) { 
+                //}); TO READ DATA
+                
+                var user_id = $('#user_id').attr('name');
+                var name = $('.critical_btn').attr('name');
+
+                var write_json = {"id":user_id, "name":name};
+                var asJSON = JSON.stringify(write_json);
+                alert(write_json)
+            }
+        });
+
+      });
+    });*/
+  </script>
+
+{% endblock %}
