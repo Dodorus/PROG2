@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, BooleanField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_wtf.file import FileField, FileAllowed
 from main.models import benutzer_k
@@ -68,3 +68,7 @@ class RezeptErfassen(FlaskForm):
 	zutatM10 = StringField('Menge')
 	
 	submit = SubmitField('Rezept speichern')
+
+class AnzPersonenForm(FlaskForm):
+	personenAnz = RadioField('', coerce=int, choices=[1,2,3,4,5,6])
+	submit = SubmitField('Go')

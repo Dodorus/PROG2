@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request, jsonify, make_response, session
 from flask_login import login_user, current_user, logout_user, login_required
 from main import app, db, bcrypt, daten
-from main.forms import RegistrationForm, LoginForm, RezeptErfassen
+from main.forms import RegistrationForm, LoginForm, RezeptErfassen, AnzPersonenForm
 from main.models import benutzer_k, aufgaben, load_user
 from datetime import datetime
 import main.daten
@@ -59,7 +59,15 @@ def rezepte():
 		if t == "user_id":
 			user_id = user_id
 
-	return render_template("rezepte.html", title="Rezepte", rl=rl, user_id=user_id)
+	datei_ver = 'rezepte_verwaltung.json'
+	rezept_ver_load = daten.load_json(datei_ver)
+	rl_v = rezept_ver_load["rezepte_verwaltung"]
+
+	form = AnzPersonenForm()
+	if form.validate_on_submit():
+		print("yes")
+
+	return render_template("rezepte.html", title="Rezepte", form=form, rl=rl, user_id=user_id, rl_v=rl_v)
 
 @app.route('/background_process/<name>', methods=['GET', 'POST'])
 def background_process(name=False):
@@ -69,54 +77,81 @@ def background_process(name=False):
 	date = datetime.now()
 	klicked = "klicked"
 	gefunden = False
+	gefunden_2 = False
 
+	#test wenn rezepte.html verändert wird, richtige Werteübergabe von Ajax
+	#print(id_1,name_1)
+	
 	datei_ver = 'rezepte_verwaltung.json'
 	datei_inhalt_ver = daten.load_json(datei_ver)
 
 	for a in datei_inhalt_ver['rezepte_verwaltung']:
 		if gefunden == False:
 			for b,c in a.items():
-				if gefunden == False:
-					if b == name_1:
-						if c["status"] == "klicked":
-							c["status"] = "unklicked"
-							gefunden = True
-							break
-						elif c["status"] == "unklicked":
-							c["status"] = "klicked"
-							gefunden = True
-							break
-						else:
-							print("else")
-							break
-					elif gefunden == True:
-						break
-					else:
-						datei_inhalt_ver['rezepte_verwaltung'].append({
-							name_1: {
-							"id_of_user": id_1,
-							"timestamp": str(date),
-							"status": klicked
-							}
-						})
-						gefunden = True
-						break
+				if b == name_1:
+				#b ist id des rezepts, c ist inhalt des rezepts
+					for f in c:
+						for userid_of_rezept, inhaltrezept in f.items():
+							if userid_of_rezept == id_1:
+								if gefunden == False:
+									print(inhaltrezept["status"])
+									if inhaltrezept["status"] == "btn-success":
+										inhaltrezept["status"] = ""
+										gefunden = True
+										break
+									elif inhaltrezept["status"] == "":
+										inhaltrezept["status"] = "btn-success"
+										gefunden = True
+										break
+									else:
+										print("else1")
+										break
+								else:
+									break
+
+
+							else:
+								print("falsche ID")
+								
+
 				else:
-					print("else")
+					#if b hier fertig
 					break
-		else:
-			print("else")
+
+		elif gefunden == False:
+			datei_inhalt_ver['rezepte_verwaltung'].append({
+				name_1: [{
+				id_1:{
+				"timestamp": str(date),
+				"status": klicked
+				}}]
+			})
+			gefunden = True
 			break
+			#if id==id hier fertig
+		else:
+			print("")
 
 	daten.save_json(datei_ver, datei_inhalt_ver)
-"""
-		
 
-	daten.save_json(datei_ver, datei_inhalt_ver)
-"""
 
-		
 
+@app.route("/favoriten")
+@login_required
+def favoriten():
+	rezeptload = daten.load_values()
+	rl = rezeptload["rezepte"]
+
+	datei_ver = 'rezepte_verwaltung.json'
+	rezept_ver_load = daten.load_json(datei_ver)
+	rl_v = rezept_ver_load["rezepte_verwaltung"]
+	testing = "False"
+
+	for t,user_id in session.items():
+		if t == "user_id":
+			user_id = user_id
+
+	return render_template("rezept_favoriten.html", title="Rezepte", rl=rl, user_id=user_id, rl_v=rl_v)
 
 	
 	

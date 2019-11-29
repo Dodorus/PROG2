@@ -1,45 +1,33 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="row">
+        <div class="col-12" id="user_id" name ="{{ user_id }}">
+            <h1>Deine Favoriten</h1>
+        </div>
         <div class="col-8">
-            <div id="user_id" name ="{{ user_id }}">
-                <h1>Rezepte suchen und finden</h1>
-            </div>
-            <div>
-                <p>Suche dir leckere Rezepte aus und markiere sie per Button oben rechts. Dannach kannst du dir unter "Meine Woche", alle Menüs in der Übersicht anschauen und dirket einsehen was und wie viel du genau kaufen musst.</p>
-            </div>
+            <p>Die Übersicht deiner Favoriten-Menüs</p>
+        </div>
+    </div>
     <!-- Grid row -->
-
     {% for d in rl %}
+        {% set testing = 0 %}
+        {% for i in rl_v %}
+            {% for z,v in i.items() %}
+                {% if z == d.id %}
+                    {% if v.id_of_user == user_id %}
+                        {% if v.status == "btn-success" %}
+
+
         <div class="row" style="margin-bottom:20px;">
 
             <!-- Grid column -->
-            <div class="col-12">
+            <div class="col-lg-7 col-md-12">
+
             <!--Card Wider-->
             <div class="card card-cascade wider">
               <!--Card image-->
                 <img src="../static/img/rzp_images/{{ d.img }}" class="card-img-top" alt="wider">
-                <div class="card-img-overlay text-right">
-                {% for i in rl_v %}
-                    {% set done = False %}
-                    {% for n,l in i.items() %}
-                        {% if n == d.id  %}
-                            {% for lists in l %}
-                                {% for bid,binhalt in lists.items() %}
-                                <!-- bid ist id des users des beitrags, binhalt ist status  -->
-                                    {% if bid == user_id %}
-                                        {% set done = True %}
-                                        <button name="{{ d.id }}" class="{{ binhalt.status }} btn critical_btn btn-secondary">+</button>
-                                    {% endif %}
-                               {% endfor %}
-                            {% endfor %}
-                        {% elif done == False %}
-                            {% set done = True %}
-                        {% else %}
-                            <button name="{{ d.id }}" class="{{ binhalt.status }} btn critical_btn btn-secondary">+</button>
-                    {% endfor %}
-                {% endfor %}
-                </div>
+                
               <!--/Card image-->
 
               <!--Card content-->
@@ -71,31 +59,14 @@
 
             </div>
         </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
         {% endfor %}
 
   <!-- Grid column -->
-        </div>
-        <div class="col-4">
-            <div class="position-fixed">
-                <h3 class="mb-4">Rezeptbay</h3>
-                <h6>Eigene Rezepte hinterlegen</h6>
-                <a href="{{ url_for('rezepte_speichern') }}" ><button type="button" class="btn btn-secondary">Jetzt Speichern</button></a>
-
-                <h6>Rezepte suchen</h6>
-                <p>Search</p>
-
-                <h6>Anzahl Personen</h6>
-                {{ form.personenAnz.label(class="form-control" )}}
-                {{ form.personenAnz.label(class="form-control-label" )}}
-
-                {{ form.submit(class="btn btn-outline-info") }}
-
-                </div>
-                
-            </div>
-    
-    </div>
-
 {% endblock content %}
 {% block javascript %}
   <script>

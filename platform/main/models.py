@@ -17,7 +17,7 @@ class benutzer_k(db.Model, UserMixin):
 	auf_rel = db.relationship('aufgaben', backref='aufgabenAutor', lazy = True)
 
 	def __repr__(self):
-		return f"benutzer_k('{self.name_econ}', '{self.email_econ}', '{self.image_file_econ}'"
+		return f"benutzer_k('{self.name_econ}', '{self.email_econ}', '{self.image_file_econ}')"
 
 class aufgaben(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
