@@ -1,10 +1,25 @@
 from datetime import datetime
-from main import db, login_manager
+from main import db, login_manager, collection
 from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
 	return benutzer_k.query.get(int(user_id))
+
+def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
+	online_rezepts = {
+		"timestamp": str(key),
+	    "img" : pic,
+	    "name": R_name,
+	    "zutaten": list_zut,
+	    "personen": pers
+		}
+	go = collection.insert_one(online_rezepts)
+
+def neues_rezept_abfragen(rezept_name):
+	rezept_load = collection.find(rezept_name)
+	return rezept_load
+
 
 class benutzer_k(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)

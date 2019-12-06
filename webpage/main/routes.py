@@ -1,15 +1,15 @@
 from flask import render_template, url_for, flash, redirect, request, jsonify, make_response, session
 from flask_login import login_user, current_user, logout_user, login_required
-from main import app, db, bcrypt, daten, mongo
+from main import app, db, bcrypt, daten
 from main.forms import RegistrationForm, LoginForm, RezeptErfassen, AnzPersonenForm
-from main.models import benutzer_k, aufgaben, load_user
+from main.models import benutzer_k, aufgaben, load_user, neues_rezept_ablegen, neues_rezept_abfragen
 from datetime import datetime
 import main.daten
 import json
 
 @app.route("/")
 def index():
-	
+
 	return render_template("index.html")
 
 @app.route("/uebersicht")
@@ -55,26 +55,24 @@ def logout():
 @app.route("/rezepte")
 @login_required
 def rezepte():
-	rezeptload = daten.load_values()
-	rl = rezeptload["rezepte"]
+	rezept_name = {}
+	rl = neues_rezept_abfragen(rezept_name)
+
 	user_session = load_user(session["user_id"])
 	for t,user_id in session.items():
 		if t == "user_id":
 			user_id = user_id
 
-	datei_ver = 'rezepte_verwaltung.json'
-	rezept_ver_load = daten.load_json(datei_ver)
-	rl_v = rezept_ver_load["rezepte_verwaltung"]
-	testing = 'False'
-	
 	form = AnzPersonenForm()
 	if form.validate_on_submit():
 		print("yes")
 
-	return render_template("rezepte.html", title="Rezepte", form=form, rl=rl, user_id=user_id, rl_v=rl_v)
+	return render_template("rezepte.html", title="Rezepte", rl=rl, user_id=user_id, form=form)
 
 @app.route('/background_process/<name>', methods=['GET', 'POST'])
 def background_process(name=False):
+
+	"""
 	name = name.split(",")
 	id_1 = name[0]
 	name_1 = name[1]
@@ -138,7 +136,7 @@ def background_process(name=False):
 
 	daten.save_json(datei_ver, datei_inhalt_ver)
 
-
+"""
 
 @app.route("/favoriten")
 @login_required
@@ -162,9 +160,11 @@ def favoriten():
 @login_required
 def rezepte_speichern():
 	form = RezeptErfassen()
-	list_zutaten = {1,2,3,4,5,6,7,8,9,10}
+
 	if form.validate_on_submit():
 		R_name = form.rezeptName.data
+
+		person_anz = form.persons.data
 
 		if form.rezeptBild.data:
 			picture_file = daten.save_pictures(form.rezeptBild.data)
@@ -211,20 +211,21 @@ def rezepte_speichern():
 		zutatMA_10 = form.zutatMA10.data
 
 		#dict liste machen, werte speichern
+
 		list_zutaten = {zutat_1: zutat_1 + "," + zutatM_1 + "," + zutatMA_1,
 		zutat_2: zutat_2 + "," + zutatM_2 + "," + zutatMA_2,
-		zutat_3: zutat_3 + "," + zutatM_3 + "," + zutatMA_3
+		zutat_3: zutat_3 + "," + zutatM_3 + "," + zutatMA_3,
+		zutat_4: zutat_4 + "," + zutatM_4 + "," + zutatMA_4,
+		zutat_5: zutat_5 + "," + zutatM_5 + "," + zutatMA_5,
+		zutat_6: zutat_6 + "," + zutatM_6 + "," + zutatMA_6,
+		zutat_7: zutat_7 + "," + zutatM_7 + "," + zutatMA_7,
+		zutat_8: zutat_8 + "," + zutatM_8 + "," + zutatMA_8,
+		zutat_9: zutat_9 + "," + zutatM_9 + "," + zutatMA_9,
+		zutat_10: zutat_10 + "," + zutatM_10 + "," + zutatMA_10
 		}
 
 		key = datetime.now()
+		neues_rezept_ablegen(key, R_name, pic, list_zutaten, person_anz)
+		
 
-		online_rezepts = mongo.db.rezepte.insert_one(
-			{
-			"timestamp": str(key)
-		    #,"img" : pic,
-		    #"name": Rname,
-		    #"zutaten": list_zutaten
-			}
-		)
-
-	return render_template("rezepte_speichern.html", title="Rezepte erfassen", form=form, list_zutaten=list_zutaten)
+	return render_template("rezepte_speichern.html", title="Rezepte erfassen", form=form)

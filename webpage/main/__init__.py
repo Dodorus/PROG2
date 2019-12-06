@@ -2,7 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from flask_pymongo import PyMongo
+import pymongo
+from pymongo import MongoClient
 import os
 import secrets
 
@@ -19,6 +20,8 @@ login_manager.login_message_category = 'info'
 
 # add mongo url to flask config, so that flask_pymongo can use it to make connection
 
-mongo = PyMongo(app, uri="mongodb+srv://dodorus:dom195kun@cluster0-3vwwc.mongodb.net/rezeptbay?retryWrites=true&w=majority")
+mongo = MongoClient("mongodb+srv://dodorus:dom195kun@cluster0-3vwwc.mongodb.net/rezeptbay?retryWrites=true&w=majority")
+dbmongo = mongo["rezeptbay"]
+collection = dbmongo["rezepte"]
 
 from main import routes

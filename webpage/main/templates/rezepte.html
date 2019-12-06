@@ -20,27 +20,7 @@
               <!--Card image-->
                 <img src="../static/img/rzp_images/{{ d.img }}" class="card-img-top" alt="wider">
                 <div class="card-img-overlay text-right">
-                {% for i in rl_v %}
-                    {% for n,l in i.items() %}
-                        {% if n == d.id  %}
-                            {% for lists in l %}
-                                {% for bid,binhalt in lists.items() %}
-                                <!-- bid ist id des users des beitrags, binhalt ist status  -->
-                                    {% if done == 'True' %}
-                                        
-                                        <button name="{{ d.id }}" class="{{ binhalt.status }} btn critical_btn btn-secondary">+</button>
-                                    {% elif bid == user_id %}
-                                        {% set done = 'True' %}
-                                        <button name="{{ d.id }}" class="btn critical_btn btn-secondary">+</button>
-                                        {{ done }}
-                                    {% else %}
-                                        {{ d.id }}
-                                    {% endif %}
-                               {% endfor %}
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
+                   
                 </div>
               <!--/Card image-->
 
@@ -48,7 +28,7 @@
               <div class="card-body card-body-cascade text-center">
                 <!--Title-->
              
-                <h4 class="card-title"><strong>{{ d.name }}</strong></h4>
+               <h4 class="card-title"><strong>{{ d.name }}</strong></h4>
               
                 <h6 class="indigo-text"><strong>Zutaten</strong></h6>
 
@@ -60,7 +40,6 @@
                                 {% endautoescape %}
                         </span>
                         <span>
-                            {{ e }}
                         </span><br />
                         {% endfor %}
                     </p>
