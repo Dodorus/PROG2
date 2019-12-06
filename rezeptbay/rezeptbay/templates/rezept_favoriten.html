@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-12" id="user_id" name ="{{ user_id }}">
+            <h1>Deine Favoriten</h1>
+        </div>
+        <div class="col-8">
+            <p>Die Übersicht deiner Favoriten-Menüs</p>
+        </div>
+    </div>
+    <!-- Grid row -->
+    {% for d in rl %}
+        {% set testing = 0 %}
+        {% for i in rl_v %}
+            {% for z,v in i.items() %}
+                {% if z == d.id %}
+                    {% if v.id_of_user == user_id %}
+                        {% if v.status == "btn-success" %}
+
+
+        <div class="row" style="margin-bottom:20px;">
+
+            <!-- Grid column -->
+            <div class="col-lg-7 col-md-12">
+
+            <!--Card Wider-->
+            <div class="card card-cascade wider">
+              <!--Card image-->
+                <img src="../static/img/rzp_images/{{ d.img }}" class="card-img-top" alt="wider">
+                
+              <!--/Card image-->
+
+              <!--Card content-->
+              <div class="card-body card-body-cascade text-center">
+                <!--Title-->
+             
+                <h4 class="card-title"><strong>{{ d.name }}</strong></h4>
+              
+                <h6 class="indigo-text"><strong>Zutaten</strong></h6>
+
+                
+                    <p class="card-text" style="text-align:center;">
+                        {% for e,f in d.zutaten.items() %}
+                        <span>{% autoescape false %}
+                                {{ f | replace(",", " ") }}
+                                {% endautoescape %}
+                        </span>
+                        <span>
+                            {{ e }}
+                        </span><br />
+                        {% endfor %}
+                    </p>
+
+              </div>
+              <!--/.Card content-->
+
+            </div>
+            <!--/.Card Wider-->
+
+            </div>
+        </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+        {% endfor %}
+
+  <!-- Grid column -->
+{% endblock content %}
+{% block javascript %}
+  <script>
+
+    $(".critical_btn").click(function() {
+      $(this).toggleClass('btn-success');
+    });
+
+    $(function() {
+        $(".critical_btn").click(function() {
+
+            var user_id = $('#user_id').attr('name');
+            var name = this.name;
+
+            var urlToCall = '/background_process/' + user_id + "," + name;
+
+            $.ajax({
+                url: urlToCall,
+                type: "GET",
+            });
+            ajax.reload()
+        });
+    });
+        // Neue Idee
+        /*
+        $.ajax({
+            url: '../static/rezepte_verwaltung.json',
+            dataType: 'json',
+            type: 'get',
+            cache: 'false',
+            success: function(data){
+                //$(data.rezepte_verwaltung).each(function(index, value) { 
+                //}); TO READ DATA
+                
+                var user_id = $('#user_id').attr('name');
+                var name = $('.critical_btn').attr('name');
+
+                var write_json = {"id":user_id, "name":name};
+                var asJSON = JSON.stringify(write_json);
+                alert(write_json)
+            }
+        });
+
+      });
+    });*/
+  </script>
+
+{% endblock %}

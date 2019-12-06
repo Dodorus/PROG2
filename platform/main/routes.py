@@ -9,6 +9,7 @@ import json
 
 @app.route("/")
 def index():
+	
 	return render_template("index.html")
 
 @app.route("/uebersicht")
@@ -62,7 +63,8 @@ def rezepte():
 	datei_ver = 'rezepte_verwaltung.json'
 	rezept_ver_load = daten.load_json(datei_ver)
 	rl_v = rezept_ver_load["rezepte_verwaltung"]
-
+	testing = 'False'
+	
 	form = AnzPersonenForm()
 	if form.validate_on_submit():
 		print("yes")

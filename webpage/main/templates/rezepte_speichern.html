@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Eigenes Rezept hinterlegen</h1>
+        </div>
+        <div class="col-8">
+        	<p>Später kann dieses Rezept auch den Favoriten hinzugefügt werden.</p>
+        </div>
+    </div>
+    <div class="row">
+    	<div class="col-8">
+    		<form method="POST" action="" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+			<div class="form-row">
+				<legend class="border-bottom md-12">Jetzt Rezept speichern</legend>
+				<dir class="form-group col-md-10">
+					{{ form.rezeptName.label(class="form-control-label" )}}
+					{{ form.rezeptName(class="form-control form-control-lg") }}
+				</dir>
+
+				<dir class="form-group col-md-10">
+					{{ form.rezeptBild.label()}}
+					{{ form.rezeptBild(class="form-control-file") }}
+					{% if form.rezeptBild.errors %}
+						{% for error in form.rezeptBild.errors %}
+							<span class="text-danger">{{ error }}</span>
+						{% endfor %}
+					{% endif %}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat1.label(class="form-control-label" )}}
+					{{ form.zutat1(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM1.label(class="form-control-label" )}}
+					{{ form.zutatM1(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA1.label(class="form-control-label" )}}
+					{{ form.zutatMA1(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat2.label(class="form-control-label" )}}
+					{{ form.zutat2(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM2.label(class="form-control-label" )}}
+					{{ form.zutatM2(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA2.label(class="form-control-label" )}}
+					{{ form.zutatMA2(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat3.label(class="form-control-label" )}}
+					{{ form.zutat3(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM3.label(class="form-control-label" )}}
+					{{ form.zutatM3(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA3.label(class="form-control-label" )}}
+					{{ form.zutatMA3(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat4.label(class="form-control-label" )}}
+					{{ form.zutat4(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM4.label(class="form-control-label" )}}
+					{{ form.zutatM4(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA4.label(class="form-control-label" )}}
+					{{ form.zutatMA4(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat5.label(class="form-control-label" )}}
+					{{ form.zutat5(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM5.label(class="form-control-label" )}}
+					{{ form.zutatM5(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA5.label(class="form-control-label" )}}
+					{{ form.zutatMA5(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat6.label(class="form-control-label" )}}
+					{{ form.zutat6(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM6.label(class="form-control-label" )}}
+					{{ form.zutatM6(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA6.label(class="form-control-label" )}}
+					{{ form.zutatMA6(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat7.label(class="form-control-label" )}}
+					{{ form.zutat7(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM7.label(class="form-control-label" )}}
+					{{ form.zutatM7(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA7.label(class="form-control-label" )}}
+					{{ form.zutatMA7(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat9.label(class="form-control-label" )}}
+					{{ form.zutat9(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM9.label(class="form-control-label" )}}
+					{{ form.zutatM9(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA9.label(class="form-control-label" )}}
+					{{ form.zutatMA9(class="form-control form-control-md") }}
+				</dir>
+
+				<dir class="form-group col-md-4">
+					{{ form.zutat10.label(class="form-control-label" )}}
+					{{ form.zutat10(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatM10.label(class="form-control-label" )}}
+					{{ form.zutatM10(class="form-control form-control-md") }}
+				</dir>
+				<dir class="form-group col-md-4">
+					{{ form.zutatMA10.label(class="form-control-label" )}}
+					{{ form.zutatMA10(class="form-control form-control-md") }}
+				</dir>
+			</div>
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+			</form>
+    	</div>
+    </div>
+{% endblock content %}

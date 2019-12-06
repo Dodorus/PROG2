@@ -1,5 +1,5 @@
 from datetime import datetime
-from main import app
+from rezeptbay import main
 import secrets
 import os
 from PIL import Image

@@ -1,0 +1,2 @@
+FLASK_APP=rezeptbay
+FLASK_ENV=development

@@ -33,3 +33,6 @@ class aufgaben(db.Model):
 
 	def __repr__(self):
 		return f"aufgaben('{self.titel}', '{self.erfassungsDate}'"
+
+
+

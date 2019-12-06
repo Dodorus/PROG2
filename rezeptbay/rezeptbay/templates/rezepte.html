@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-8">
+            <div id="current_user" name ="{{ current_user }}">
+                <h1>Rezepte suchen und finden</h1>
+            </div>
+            <div>
+                <p>Suche dir leckere Rezepte aus und markiere sie per Button oben rechts. Dannach kannst du dir unter "Meine Woche", alle Menüs in der Übersicht anschauen und dirket einsehen was und wie viel du genau kaufen musst.</p>
+            </div>
+    <!-- Grid row -->
+
+    {% for d in rl %}
+        <div class="row" style="margin-bottom:20px;">
+
+            <!-- Grid column -->
+            <div class="col-12">
+            <!--Card Wider-->
+            <div class="card card-cascade wider">
+              <!--Card image-->
+                <img src="../static/img/rzp_images/{{ d.img }}" class="card-img-top" alt="wider">
+                <div class="card-img-overlay text-right">
+                {% for i in rl_v %}
+                    {% for n,l in i.items() %}
+                        {% if n == d.id  %}
+                            {% for lists in l %}
+                                {% for bid,binhalt in lists.items() %}
+                                <!-- bid ist id des users des beitrags, binhalt ist status  -->
+                                    {% if done == 'True' %}
+                                        
+                                        <button name="{{ d.id }}" class="{{ binhalt.status }} btn critical_btn btn-secondary">+</button>
+                                    {% elif bid == user_id %}
+                                        {% set done = 'True' %}
+                                        <button name="{{ d.id }}" class="btn critical_btn btn-secondary">+</button>
+                                        {{ done }}
+                                    {% else %}
+                                        {{ d.id }}
+                                    {% endif %}
+                               {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                </div>
+              <!--/Card image-->
+
+              <!--Card content-->
+              <div class="card-body card-body-cascade text-center">
+                <!--Title-->
+             
+                <h4 class="card-title"><strong>{{ d.name }}</strong></h4>
+              
+                <h6 class="indigo-text"><strong>Zutaten</strong></h6>
+
+                
+                    <p class="card-text" style="text-align:center;">
+                        {% for e,f in d.zutaten.items() %}
+                        <span>{% autoescape false %}
+                                {{ f | replace(",", " ") }}
+                                {% endautoescape %}
+                        </span>
+                        <span>
+                            {{ e }}
+                        </span><br />
+                        {% endfor %}
+                    </p>
+
+              </div>
+              <!--/.Card content-->
+
+            </div>
+            <!--/.Card Wider-->
+
+            </div>
+        </div>
+        {% endfor %}
+
+  <!-- Grid column -->
+        </div>
+        <div class="col-4">
+            <div class="position-fixed">
+                <h3 class="mb-4">Rezeptbay</h3>
+                <h6>Eigene Rezepte hinterlegen</h6>
+                <a href="{{ url_for('rezepte_speichern') }}" ><button type="button" class="btn btn-secondary">Jetzt Speichern</button></a>
+
+                <h6>Rezepte suchen</h6>
+                <p>Search</p>
+
+                <h6>Anzahl Personen</h6>
+                {{ form.personenAnz.label(class="form-control" )}}
+                {{ form.personenAnz.label(class="form-control-label" )}}
+
+                {{ form.submit(class="btn btn-outline-info") }}
+
+                </div>
+                
+            </div>
+    
+    </div>
+
+{% endblock content %}
+{% block javascript %}
+  <script>
+
+    $(".critical_btn").click(function() {
+      $(this).toggleClass('btn-success');
+    });
+
+    $(function() {
+        $(".critical_btn").click(function() {
+
+            var user_id = $('#user_id').attr('name');
+            var name = this.name;
+
+            var urlToCall = '/background_process/' + user_id + "," + name;
+
+            $.ajax({
+                url: urlToCall,
+                type: "GET",
+            });
+            ajax.reload()
+        });
+    });
+        // Neue Idee
+        /*
+        $.ajax({
+            url: '../static/rezepte_verwaltung.json',
+            dataType: 'json',
+            type: 'get',
+            cache: 'false',
+            success: function(data){
+                //$(data.rezepte_verwaltung).each(function(index, value) { 
+                //}); TO READ DATA
+                
+                var user_id = $('#user_id').attr('name');
+                var name = $('.critical_btn').attr('name');
+
+                var write_json = {"id":user_id, "name":name};
+                var asJSON = JSON.stringify(write_json);
+                alert(write_json)
+            }
+        });
+
+      });
+    });*/
+  </script>
+
+{% endblock %}
