@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect, request, jsonify, m
 from flask_login import login_user, current_user, logout_user, login_required
 from main import app, db, bcrypt, daten
 from main.forms import RegistrationForm, LoginForm, RezeptErfassen, AnzPersonenForm
-from main.models import benutzer_k, aufgaben, load_user, neues_rezept_ablegen, neues_rezept_abfragen
+from main.models import benutzer_k, aufgaben, load_user, neues_rezept_ablegen, neues_rezept_abfragen, rezept_verknüpfung_update
 from datetime import datetime
 import main.daten
 import json
@@ -72,10 +72,14 @@ def rezepte():
 @app.route('/background_process/<name>', methods=['GET', 'POST'])
 def background_process(name=False):
 
-	"""
 	name = name.split(",")
-	id_1 = name[0]
-	name_1 = name[1]
+	u_id = name[0]
+	b_id = name[1]
+	b_name = name[2]
+	u_rl = rezept_verknüpfung_update(u_id,b_id,b_name)
+
+	"""
+	
 	date = datetime.now()
 	klicked = "klicked"
 	gefunden = False

@@ -1,4 +1,5 @@
 from datetime import datetime
+from flask import flash
 from main import db, login_manager, collection
 from flask_login import UserMixin
 
@@ -7,18 +8,44 @@ def load_user(user_id):
 	return benutzer_k.query.get(int(user_id))
 
 def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
-	online_rezepts = {
-		"timestamp": str(key),
-	    "img" : pic,
-	    "name": R_name,
-	    "zutaten": list_zut,
-	    "personen": pers
-		}
-	go = collection.insert_one(online_rezepts)
+	rl_pruef = collection.find_one({"name": R_name})
+	if rl_pruef == None:
+		online_rezepts = {
+			"timestamp": str(key),
+		    "img" : pic,
+		    "name": R_name,
+		    "zutaten": list_zut,
+		    "personen": pers,
+		    "fav": ""
+			}
+
+		go = collection.insert_one(online_rezepts)
+	flash(f'Dieser Name existiert für dieses Rezept bereits', 'warning')
 
 def neues_rezept_abfragen(rezept_name):
 	rezept_load = collection.find(rezept_name)
 	return rezept_load
+
+def rezept_verknüpfung_update(user_id, bid, name):
+	find = collection.find_one({"name":name})
+	print(find)
+	do = find['fav']
+	for val in do:
+		print(val)
+		if val == user_id:
+			do.remove(val)
+			print("raus")
+		elif val == "":
+			do.append(user_id)
+			print("user")
+		else:
+			print("")
+
+	print(do)
+	#myquery = { "fav": "[]" }
+	#newvalues = { "$set": { "fav": user_id } }
+	#collection.update_one(myquery,newvalues)
+	
 
 
 class benutzer_k(db.Model, UserMixin):

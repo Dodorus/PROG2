@@ -2,7 +2,7 @@
 {% block content %}
     <div class="row">
         <div class="col-8">
-            <div id="user_id" name ="{{ user_id }}">
+            <div id="user_id" name="{{ user_id }}">
                 <h1>Rezepte suchen und finden</h1>
             </div>
             <div>
@@ -14,13 +14,13 @@
         <div class="row" style="margin-bottom:20px;">
 
             <!-- Grid column -->
-            <div class="col-12">
+            <div class="col-10">
             <!--Card Wider-->
             <div class="card card-cascade wider">
               <!--Card image-->
                 <img src="../static/img/rzp_images/{{ d.img }}" class="card-img-top" alt="wider">
                 <div class="card-img-overlay text-right">
-                   
+                    <button name="{{ d._id }},{{ d.name }}" class=" btn critical_btn btn-secondary">+</button>
                 </div>
               <!--/Card image-->
 
@@ -35,9 +35,10 @@
                 
                     <p class="card-text" style="text-align:center;">
                         {% for e,f in d.zutaten.items() %}
-                        <span>{% autoescape false %}
-                                {{ f | replace(",", " ") }}
-                                {% endautoescape %}
+                        <span>
+                        {% set list1 = f.split(',') %}
+                        {{ list1[1] }}{{ list1[2] }}
+                        {{ list1[0] }}
                         </span>
                         <span>
                         </span><br />
@@ -89,9 +90,9 @@
         $(".critical_btn").click(function() {
 
             var user_id = $('#user_id').attr('name');
-            var name = this.name;
+            var b_id = this.name;
 
-            var urlToCall = '/background_process/' + user_id + "," + name;
+            var urlToCall = '/background_process/' + user_id + "," + b_id;
 
             $.ajax({
                 url: urlToCall,

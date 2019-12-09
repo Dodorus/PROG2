@@ -41,43 +41,43 @@ class RezeptErfassen(FlaskForm):
 
 	zutat1 = StringField('Erste Zutat', validators=[DataRequired()])
 	zutatM1 = StringField('Menge (bsp: 100 oder 1)', validators=[DataRequired()])
-	zutatMA1 = SelectField('Grösse (bsp: g oder kg)', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')], validators=[DataRequired()])
+	zutatMA1 = SelectField('Grösse (bsp: g oder kg)', choices=[('Stück', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')], validators=[DataRequired()])
 
 	zutat2 = StringField('nächste Zutat')
 	zutatM2 = StringField('Menge')
-	zutatMA2 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA2 = SelectField('Grösse', choices=[('Stück', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 
 	zutat3 = StringField('nächste Zutat')
 	zutatM3 = StringField('Menge')
-	zutatMA3 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA3 = SelectField('Grösse', choices=[('Stück', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 
 	zutat4 = StringField('nächste Zutat')
 	zutatM4 = StringField('Menge')
-	zutatMA4 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA4 = SelectField('Grösse', choices=[('', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 
 	zutat5 = StringField('nächste Zutat')
 	zutatM5 = StringField('Menge')
-	zutatMA5 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA5 = SelectField('Grösse', choices=[('', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 
 	zutat6 = StringField('nächste Zutat')
 	zutatM6 = StringField('Menge')
-	zutatMA6 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA6 = SelectField('Grösse', choices=[('', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 
 	zutat7 = StringField('nächste Zutat')
 	zutatM7 = StringField('Menge')
-	zutatMA7 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA7 = SelectField('Grösse', choices=[('', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 
 	zutat8 = StringField('nächste Zutat')
 	zutatM8 = StringField('Menge')
-	zutatMA8 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA8 = SelectField('Grösse', choices=[('', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 
 	zutat9 = StringField('nächste Zutat')
 	zutatM9 = StringField('Menge')
-	zutatMA9 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA9 = SelectField('Grösse', choices=[('', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 
 	zutat10 = StringField('nächste Zutat')
 	zutatM10 = StringField('Menge')
-	zutatMA10 = SelectField('Grösse', choices=[('g', 'g'), ('mg', 'mg'), ('kg', 'kg'), ('-', 'Stück'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
+	zutatMA10 = SelectField('Grösse', choices=[('', 'Stück'), ('mg', 'mg'), ('kg', 'kg'), ('g', 'g'), ('tl', 'Teelöffel'), ('el', 'Esslöffel'), ('ml', 'Milliliter'), ('dl', 'Deziliter'), ('l', 'Liter')])
 	
 	submit = SubmitField('Rezept speichern')
 
