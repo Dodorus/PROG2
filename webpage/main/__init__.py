@@ -23,5 +23,6 @@ login_manager.login_message_category = 'info'
 mongo = MongoClient("mongodb+srv://dodorus:dom195kun@cluster0-3vwwc.mongodb.net/rezeptbay?retryWrites=true&w=majority")
 dbmongo = mongo["rezeptbay"]
 collection = dbmongo["rezepte"]
+wochentage = dbmongo["wochentage"]
 
 from main import routes

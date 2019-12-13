@@ -1,52 +1,61 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="row">
-        <div class="col-12" id="user_id" name ="{{ user_id }}">
-            <h1>Deine Favoriten</h1>
-        </div>
         <div class="col-8">
-            <p>Die Übersicht deiner Favoriten-Menüs</p>
-        </div>
-    </div>
+            <div id="user_id" name="{{ user_id }}">
+                <h1>Rezepte suchen und finden</h1>
+            </div>
+            <div>
+                <p>Suche dir leckere Rezepte aus und markiere sie per Button oben rechts. Dannach kannst du dir unter "Meine Woche", alle Menüs in der Übersicht anschauen und dirket einsehen was und wie viel du genau kaufen musst.</p>
+            </div>
     <!-- Grid row -->
+
     {% for d in rl %}
-        {% set testing = 0 %}
-        {% for i in rl_v %}
-            {% for z,v in i.items() %}
-                {% if z == d.id %}
-                    {% if v.id_of_user == user_id %}
-                        {% if v.status == "btn-success" %}
-
-
+        {% if user_id in d.fav %}
+            
         <div class="row" style="margin-bottom:20px;">
 
             <!-- Grid column -->
-            <div class="col-lg-7 col-md-12">
-
+            <div class="col-10">
             <!--Card Wider-->
             <div class="card card-cascade wider">
               <!--Card image-->
                 <img src="../static/img/rzp_images/{{ d.img }}" class="card-img-top" alt="wider">
-                
+                <div class="card-img-overlay text-right">
+                    <div class="card-img-overlay text-right">
+                        <div class="dropdown">
+                          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/background_weekplan/Montag,{{ d.name }},{{ user_id }}">Montag</a>
+                            <a class="dropdown-item" href="/background_weekplan/Dienstag,{{ d.name }},{{ user_id }}">Dienstag</a>
+                            <a class="dropdown-item" href="/background_weekplan/Mittwoch,{{ d.name }},{{ user_id }}">Mittwoch</a>
+                            <a class="dropdown-item" href="/background_weekplan/Donnerstag,{{ d.name }},{{ user_id }}">Donnerstag</a>
+                            <a class="dropdown-item" href="/background_weekplan/Freitag,{{ d.name }},{{ user_id }}">Freitag</a>
+                            <a class="dropdown-item" href="/background_weekplan/Samstag,{{ d.name }},{{ user_id }}">Samstag</a>
+                            <a class="dropdown-item" href="/background_weekplan/Sonntag,{{ d.name }},{{ user_id }}">Sonntag</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
               <!--/Card image-->
 
               <!--Card content-->
               <div class="card-body card-body-cascade text-center">
                 <!--Title-->
              
-                <h4 class="card-title"><strong>{{ d.name }}</strong></h4>
+               <h4 class="card-title"><strong>{{ d.name }}</strong></h4>
               
                 <h6 class="indigo-text"><strong>Zutaten</strong></h6>
 
                 
                     <p class="card-text" style="text-align:center;">
                         {% for e,f in d.zutaten.items() %}
-                        <span>{% autoescape false %}
-                                {{ f | replace(",", " ") }}
-                                {% endautoescape %}
+                        <span>
+                        {% set list1 = f.split(',') %}
+                        {{ list1[1] }}{{ list1[2] }}
+                        {{ list1[0] }}
                         </span>
                         <span>
-                            {{ e }}
                         </span><br />
                         {% endfor %}
                     </p>
@@ -59,59 +68,24 @@
 
             </div>
         </div>
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-        {% endfor %}
+        {% else %}
+        {% endif %}
+    {% endfor %}
+
+  <!-- Grid column -->
+        </div>
+        <div class="col-4">
+            <div class="position-fixed">
+                <h3 class="mb-4">Rezeptbay</h3>
+                <h6>Eigene Rezepte hinterlegen</h6>
+                <a href="{{ url_for('rezepte_speichern') }}" ><button type="button" class="btn btn-secondary">Jetzt Speichern</button></a>
+                
+            </div>
+    
+    </div>
 
   <!-- Grid column -->
 {% endblock content %}
 {% block javascript %}
-  <script>
-
-    $(".critical_btn").click(function() {
-      $(this).toggleClass('btn-success');
-    });
-
-    $(function() {
-        $(".critical_btn").click(function() {
-
-            var user_id = $('#user_id').attr('name');
-            var name = this.name;
-
-            var urlToCall = '/background_process/' + user_id + "," + name;
-
-            $.ajax({
-                url: urlToCall,
-                type: "GET",
-            });
-            ajax.reload()
-        });
-    });
-        // Neue Idee
-        /*
-        $.ajax({
-            url: '../static/rezepte_verwaltung.json',
-            dataType: 'json',
-            type: 'get',
-            cache: 'false',
-            success: function(data){
-                //$(data.rezepte_verwaltung).each(function(index, value) { 
-                //}); TO READ DATA
-                
-                var user_id = $('#user_id').attr('name');
-                var name = $('.critical_btn').attr('name');
-
-                var write_json = {"id":user_id, "name":name};
-                var asJSON = JSON.stringify(write_json);
-                alert(write_json)
-            }
-        });
-
-      });
-    });*/
-  </script>
 
 {% endblock %}

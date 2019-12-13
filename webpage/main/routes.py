@@ -1,8 +1,8 @@
-from flask import render_template, url_for, flash, redirect, request, jsonify, make_response, session
+from flask import render_template, url_for, flash, redirect, request, jsonify, make_response, session, Markup
 from flask_login import login_user, current_user, logout_user, login_required
 from main import app, db, bcrypt, daten
 from main.forms import RegistrationForm, LoginForm, RezeptErfassen, AnzPersonenForm
-from main.models import benutzer_k, aufgaben, load_user, neues_rezept_ablegen, neues_rezept_abfragen, rezept_verknüpfung_update
+from main.models import benutzer_k, aufgaben, load_user, neues_rezept_ablegen, neues_rezept_abfragen, rezept_verknüpfung_update, neuer_wochentag_ablegen
 from datetime import datetime
 import main.daten
 import json
@@ -56,18 +56,17 @@ def logout():
 @login_required
 def rezepte():
 	rezept_name = {}
-	rl = neues_rezept_abfragen(rezept_name)
+	db = "rezepte"
+	rl = neues_rezept_abfragen(rezept_name, db)
 
 	user_session = load_user(session["user_id"])
 	for t,user_id in session.items():
 		if t == "user_id":
 			user_id = user_id
 
-	form = AnzPersonenForm()
-	if form.validate_on_submit():
-		print("yes")
+	this = ""
 
-	return render_template("rezepte.html", title="Rezepte", rl=rl, user_id=user_id, form=form)
+	return render_template("rezepte.html", title="Rezepte", this=this, rl=rl, user_id=user_id)
 
 @app.route('/background_process/<name>', methods=['GET', 'POST'])
 def background_process(name=False):
@@ -78,87 +77,53 @@ def background_process(name=False):
 	b_name = name[2]
 	u_rl = rezept_verknüpfung_update(u_id,b_id,b_name)
 
-	"""
-	
-	date = datetime.now()
-	klicked = "klicked"
-	gefunden = False
-	gefunden_2 = False
-
-	#test wenn rezepte.html verändert wird, richtige Werteübergabe von Ajax
-	#print(id_1,name_1)
-	
-	datei_ver = 'rezepte_verwaltung.json'
-	datei_inhalt_ver = daten.load_json(datei_ver)
-
-	for a in datei_inhalt_ver['rezepte_verwaltung']:
-		if gefunden == False:
-			for b,c in a.items():
-				if b == name_1:
-				#b ist id des rezepts, c ist inhalt des rezepts
-					for f in c:
-						for userid_of_rezept, inhaltrezept in f.items():
-							if userid_of_rezept == id_1:
-								if gefunden == False:
-									print(inhaltrezept["status"])
-									if inhaltrezept["status"] == "btn-success":
-										inhaltrezept["status"] = ""
-										gefunden = True
-										break
-									elif inhaltrezept["status"] == "":
-										inhaltrezept["status"] = "btn-success"
-										gefunden = True
-										break
-									else:
-										print("else1")
-										break
-								else:
-									break
-
-
-							else:
-								print("falsche ID")
-								
-
-				else:
-					#if b hier fertig
-					break
-
-		elif gefunden == False:
-			datei_inhalt_ver['rezepte_verwaltung'].append({
-				name_1: [{
-				id_1:{
-				"timestamp": str(date),
-				"status": klicked
-				}}]
-			})
-			gefunden = True
-			break
-			#if id==id hier fertig
-		else:
-			print("")
-
-	daten.save_json(datei_ver, datei_inhalt_ver)
-
-"""
-
 @app.route("/favoriten")
 @login_required
 def favoriten():
-	rezeptload = daten.load_values()
-	rl = rezeptload["rezepte"]
-
-	datei_ver = 'rezepte_verwaltung.json'
-	rezept_ver_load = daten.load_json(datei_ver)
-	rl_v = rezept_ver_load["rezepte_verwaltung"]
-	testing = "False"
+	rezept_name = {}
+	db = "rezepte"
+	rl = neues_rezept_abfragen(rezept_name, db)
 
 	for t,user_id in session.items():
 		if t == "user_id":
 			user_id = user_id
 
-	return render_template("rezept_favoriten.html", title="Rezepte", rl=rl, user_id=user_id, rl_v=rl_v)
+	form = AnzPersonenForm()
+	if form.validate_on_submit():
+		print("yes")
 
+	return render_template("rezept_favoriten.html", title="Rezepte", form=form, rl=rl, user_id=user_id)
+
+@app.route("/wochensicht")
+@login_required
+def wochensicht():
+	for t,user_id in session.items():
+		if t == "user_id":
+			user_id = user_id
+
+	rezept_name = {"_id": user_id}
+	db = "wochensicht"
+
+	rezept_name_2 = {}
+
+	rl = neues_rezept_abfragen(rezept_name, db)
+	rl_rezepte = neues_rezept_abfragen(rezept_name_2, "")
+
+	print(rl_rezepte)
+
+	return render_template("uebersicht.html", title="Wochenübersicht", rl=rl)
+
+@app.route('/background_weekplan/<name>')
+def background_weekplan(name=False):
+
+	name = name.split(",")
+	rez_name = name[0]
+	tag = name[1]
+	user_id = name[2]
+
+	wt = neuer_wochentag_ablegen(user_id, tag, rez_name)
+
+	return redirect(url_for('favoriten'))
 
 @app.route("/rezepte/rezepte_speichern", methods=["GET", "POST"])
 @login_required

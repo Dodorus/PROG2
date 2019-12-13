@@ -20,7 +20,12 @@
               <!--Card image-->
                 <img src="../static/img/rzp_images/{{ d.img }}" class="card-img-top" alt="wider">
                 <div class="card-img-overlay text-right">
-                    <button name="{{ d._id }},{{ d.name }}" class=" btn critical_btn btn-secondary">+</button>
+                    {% if user_id in d.fav %}
+                        <button name="{{ d._id }},{{ d.name }}" class="btn-success btn critical_btn btn-secondary">+</button>
+                    {% else %}
+                        <button name="{{ d._id }},{{ d.name }}" class="btn critical_btn btn-secondary">+</button>
+                    {% endif %}
+                    
                 </div>
               <!--/Card image-->
 
@@ -58,23 +63,6 @@
   <!-- Grid column -->
         </div>
         <div class="col-4">
-            <div class="position-fixed">
-                <h3 class="mb-4">Rezeptbay</h3>
-                <h6>Eigene Rezepte hinterlegen</h6>
-                <a href="{{ url_for('rezepte_speichern') }}" ><button type="button" class="btn btn-secondary">Jetzt Speichern</button></a>
-
-                <h6>Rezepte suchen</h6>
-                <p>Search</p>
-
-                <h6>Anzahl Personen</h6>
-                {{ form.personenAnz.label(class="form-control" )}}
-                {{ form.personenAnz.label(class="form-control-label" )}}
-
-                {{ form.submit(class="btn btn-outline-info") }}
-
-                </div>
-                
-            </div>
     
     </div>
 

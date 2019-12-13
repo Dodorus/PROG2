@@ -83,4 +83,4 @@ class RezeptErfassen(FlaskForm):
 
 class AnzPersonenForm(FlaskForm):
 	personenAnz = RadioField('', coerce=int, choices=[1,2,3,4,5,6])
-	submit = SubmitField('Go')
+	submit = SubmitField('Repte')

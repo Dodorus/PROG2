@@ -1,19 +1,43 @@
-{% extends "bootstrap/base.html" %}
-{% block head %}
-    {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-{% endblock %}
-{% block navbar %}
-{{ nav.my_navbar.render() }}
-{% endblock %}
-
-
+{% extends "layout.html" %}
 {% block content %}
-<div class="container-fluid">
-</div>
-{% endblock %}
 
-{% block scripts %}
-{{ super() }}
-<!-- Hier spezielle Scripts -->
-{% endblock %}
+{% for values in rl %}
+	<div class="row">
+		{{ values }}
+	    	<div class="col-8">
+	    		<h1>Deine Wochenübersicht</h1>
+	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
+	    	</div>
+	</div>
+	<div class="row">
+	    	<div class="col-sm-8">
+	    		<h3>Montag</h3>
+	    		{{ values.Donnerstag }}
+	    	</div>
+	</div>
+	<div class="row">
+	    	<div class="col-sm-8">
+	    		<h3>Dienstag</h3>
+	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
+	    	</div>
+	</div>
+	<div class="row">
+	    	<div class="col-sm-8">
+	    		<h3>Montag</h3>
+	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
+	    	</div>
+	</div>
+	<div class="row">
+	    	<div class="col-sm-8">
+	    		<h3>Montag</h3>
+	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
+	    	</div>
+	</div>
+	<div class="row">
+	    	<div class="col-sm-8">
+	    		<h3>Montag</h3>
+	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
+	    	</div>
+	</div>
+{% endfor %}
+{% endblock content %}
