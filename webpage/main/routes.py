@@ -105,13 +105,40 @@ def wochensicht():
 	db = "wochensicht"
 
 	rezept_name_2 = {}
+	rez_tag_dict = {}
+	i = 1
+	days = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
 
-	rl = neues_rezept_abfragen(rezept_name, db)
-	rl_rezepte = neues_rezept_abfragen(rezept_name_2, "")
-
-	print(rl_rezepte)
-
-	return render_template("uebersicht.html", title="Wochenübersicht", rl=rl)
+	for weekday in days:
+		rez_tag_dict[weekday] = {}
+		for rp_wt in neues_rezept_abfragen(rezept_name, db):
+			rp_wt = rp_wt[weekday].split(",")
+			for rz_name in rp_wt:
+				for vergleich_rezepte in neues_rezept_abfragen(rezept_name_2, ""):
+					
+					if vergleich_rezepte["name"] == rz_name:
+						name = vergleich_rezepte["name"]
+						rez_tag_dict[weekday][name] = {
+							"img": vergleich_rezepte["img"],
+							"zutaten": vergleich_rezepte["zutaten"]
+						}
+						
+					else:
+						i=0
+					
+					"""
+					if vergleich_rezepte["name"] == rz_name:
+						
+						#rez_tag_dict[weekday] = [vergleich_rezepte["name"], vergleich_rezepte["img"], vergleich_rezepte["zutaten"]]
+						
+						list_vor.append(vergleich_rezepte["name"])
+						list_vor.append(vergleich_rezepte["img"])
+					else:
+						print("")
+					rez_tag_dict[weekday] = list_vor
+					"""
+	print(rez_tag_dict)				
+	return render_template("uebersicht.html", title="Wochenübersicht", rez_tag_dict=rez_tag_dict)
 
 @app.route('/background_weekplan/<name>')
 def background_weekplan(name=False):

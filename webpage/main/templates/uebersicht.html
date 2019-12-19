@@ -1,43 +1,40 @@
 {% extends "layout.html" %}
 {% block content %}
 
-{% for values in rl %}
-	<div class="row">
-		{{ values }}
-	    	<div class="col-8">
-	    		<h1>Deine Wochenübersicht</h1>
-	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
-	    	</div>
-	</div>
-	<div class="row">
-	    	<div class="col-sm-8">
-	    		<h3>Montag</h3>
-	    		{{ values.Donnerstag }}
-	    	</div>
-	</div>
-	<div class="row">
-	    	<div class="col-sm-8">
-	    		<h3>Dienstag</h3>
-	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
-	    	</div>
-	</div>
-	<div class="row">
-	    	<div class="col-sm-8">
-	    		<h3>Montag</h3>
-	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
-	    	</div>
-	</div>
-	<div class="row">
-	    	<div class="col-sm-8">
-	    		<h3>Montag</h3>
-	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
-	    	</div>
-	</div>
-	<div class="row">
-	    	<div class="col-sm-8">
-	    		<h3>Montag</h3>
-	    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
-	    	</div>
-	</div>
+			<div class="row">
+			    	<div class="col-8">
+			    		<h1>Deine Wochenübersicht</h1>
+			    		<p>Hier kannst du dir eine Einkaufliste generieren und Kalorienübersichten einsehen.</p>
+			    	</div>
+			</div>
+
+{% for day,values in rez_tag_dict.items() %}
+			<div class="row">
+					<div class="col-sm-12">
+						<h2>{{day}}</h2>
+					</div>
+			    	<div class="col-sm-12">
+
+			    		{% for ti,te in values.items() %}
+					    	<div class="card card-cascade wider col-sm-3 m-2" style="float:left;">
+							    	<img class="card-img-top" src="../static/img/rzp_images/{{te.img}}" alt="wider">
+							  		<!--Card content-->
+              						<div class="card-body card-body-cascade text-center">
+              							<h4 class="card-title">{{ti}}</h4>
+
+										{% for ui,ue in te.items() %}
+									
+							    		<p class="card-text"></p>
+											
+											{% for vi in ue[0] %}
+												{{vi}}
+											{% endfor %}
+										{% endfor %}
+							  		</div>
+							</div>
+						{% endfor %}
+					</div>
+			</div>
 {% endfor %}
+
 {% endblock content %}
