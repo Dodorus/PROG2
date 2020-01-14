@@ -3,20 +3,20 @@
 Aus verschiedenen, auch selber zusammengestellten Menüs, auswählen. Am Schluss erhält man eine Einkaufsliste von welchen Zutaten man was genau benötigt.
 
 ## Zu installierende Module aus Python (Python zeigt ja welche Module noch fehlen beim ersten Start der App)
-flask
-flask_login
-datetime
-json
-flask_sqlalchemy
-flask_bcrypt
-flask_login
-pymongo
-os
-secrets
-PIL
-wtforms_json
-flask_wtf
-wtforms
+flask,
+ flask_login,
+ datetime,
+ json,
+ flask_sqlalchemy,
+ flask_bcrypt,
+ flask_login,
+ pymongo,
+ os,
+ secrets,
+ PIL,
+ wtforms_json,
+ flask_wtf,
+ wtforms
 
 ## Start
 
