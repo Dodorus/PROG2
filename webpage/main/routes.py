@@ -125,19 +125,7 @@ def wochensicht():
 						
 					else:
 						i=0
-					
-					"""
-					if vergleich_rezepte["name"] == rz_name:
-						
-						#rez_tag_dict[weekday] = [vergleich_rezepte["name"], vergleich_rezepte["img"], vergleich_rezepte["zutaten"]]
-						
-						list_vor.append(vergleich_rezepte["name"])
-						list_vor.append(vergleich_rezepte["img"])
-					else:
-						print("")
-					rez_tag_dict[weekday] = list_vor
-					"""
-	print(rez_tag_dict)				
+				
 	return render_template("uebersicht.html", title="Wochenübersicht", rez_tag_dict=rez_tag_dict)
 
 @app.route('/background_weekplan/<name>')
