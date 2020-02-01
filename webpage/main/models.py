@@ -87,7 +87,7 @@ def neues_rezept_abfragen(rezept_name, db):
 =======
 #Wenn Verknüpfungen upgedatet werden wie Verbindungen zwischen den User und der Wochenplanung
 >>>>>>> 0f322b4a53701843c6a80e713f8765298f468b9e
-def rezept_verknüpfung_update(user_id, bid, name):
+def rezept_verknuepfung_update(user_id, bid, name):
 	find = collection.find_one({"name":name})
 	do = []
 	do = find['fav']
