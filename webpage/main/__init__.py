@@ -5,7 +5,6 @@ from flask_login import LoginManager
 import pymongo
 from pymongo import MongoClient
 import os
-import secrets
 
 #app wird initiiert
 app = Flask(__name__)
