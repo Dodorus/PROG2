@@ -33,7 +33,7 @@ def registrieren():
 		user = benutzer_k(name_econ=form.username.data, email_econ=form.email.data, password_econ=hashed_password)
 		db.session.add(user)
 		db.session.commit()
-		flash(f'Account created for {form.username.data}!', 'success')
+		flash('Account created for {form.username.data}!', 'success')
 		return redirect(url_for('login'))
 	return render_template("registrieren.html", title="Registrieren", form=form)
 
@@ -48,17 +48,17 @@ def login():
 		if user and bcrypt.check_password_hash(user.password_econ, form.password.data):
 			login_user(user, remember=form.remember.data)
 			next_page = request.args.get('next')
-			flash(f'Eingeloggt!', 'success')
+			flash('Eingeloggt!', 'success')
 			return redirect(next_page) if next_page else redirect(url_for('index'))
 		else:
-			flash(f'Überprüfe E-Mail und Password.', "danger")
+			flash('Überprüfe E-Mail und Password.', "danger")
 	return render_template("login.html", title="Login", form=form)
 
 #logout
 @app.route("/logout")
 def logout():
 	logout_user()
-	flash(f'Ausgeloggt!', 'success')
+	flash('Ausgeloggt!', 'success')
 	return redirect(url_for('index'))
 
 #alle rezepte

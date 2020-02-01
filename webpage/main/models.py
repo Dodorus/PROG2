@@ -27,15 +27,15 @@ def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
 		go = collection.insert_one(online_rezepts)
 <<<<<<< HEAD
 		#warning wird nur ausgegeben wernn dieses ablegen des rezept auch ausgeführt wurde
-	flash(f'Dieser Name existiert für dieses Rezept bereits', 'warning')
+	flash('Dieser Name existiert für dieses Rezept bereits', 'warning')
 =======
 
 		#Antwort wenn alles korrekt
-		flash(f'Rezept erfasst', 'success')
+		flash('Rezept erfasst', 'success')
 
 	else:
 		#Antwort wenn der Name bereits vorhanden ist. Name funktioniert als unique ID, eigentlich nicht so clever aber muss jetzt herhalten
-		flash(f'Dieser Name existiert für dieses Rezept bereits', 'warning')
+		flash('Dieser Name existiert für dieses Rezept bereits', 'warning')
 >>>>>>> 0f322b4a53701843c6a80e713f8765298f468b9e
 
 def neuer_wochentag_ablegen(user_id, rez_name, tag):
@@ -59,15 +59,15 @@ def neuer_wochentag_ablegen(user_id, rez_name, tag):
 			for key,val in find_day.items():
 				if key == tag:
 					if rez_name in val:
-						flash(f'Dieses Rezept ist bereits für den ' + tag + ' notiert.', 'warning')
+						flash('Dieses Rezept ist bereits für den ' + tag + ' notiert.', 'warning')
 					else:
 						val = val + "," + rez_name
 						go = wochentage.update_one({"_id": user_id}, {"$set": {tag:val}})
-						flash(f'Wurde für ' + tag + ' unter Wochenplanung eingetragen.', 'success')
+						flash('Wurde für ' + tag + ' unter Wochenplanung eingetragen.', 'success')
 		else:
 			#update die favoriten
 			go = wochentage.update_one({"_id": user_id}, {"$set": {tag:rez_name}})
-			flash(f'Wurde für ' + tag + ' eingetragen.', 'success')
+			flash('Wurde für ' + tag + ' eingetragen.', 'success')
 
 <<<<<<< HEAD
 #suchen der rezepte
