@@ -1,3 +1,5 @@
+# This Python file uses the following encoding: utf-8
+
 #import aller pakete
 from datetime import datetime
 from flask import flash

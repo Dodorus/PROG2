@@ -1,3 +1,5 @@
+# This Python file uses the following encoding: utf-8
+
 #import aller pakete
 from flask import render_template, url_for, flash, redirect, request, jsonify, make_response, session, Markup
 from flask_login import login_user, current_user, logout_user, login_required
@@ -7,8 +9,8 @@ from main.models import benutzer_k, aufgaben, load_user, neues_rezept_ablegen, n
 from datetime import datetime
 import main.daten
 import json
-#import fertig
 
+#import fertig
 #home
 @app.route("/")
 def index():
