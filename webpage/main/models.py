@@ -23,18 +23,34 @@ def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
 			}
 
 		go = collection.insert_one(online_rezepts)
+<<<<<<< HEAD
 		#warning wird nur ausgegeben wernn dieses ablegen des rezept auch ausgeführt wurde
 	flash(f'Dieser Name existiert für dieses Rezept bereits', 'warning')
+=======
+
+		#Antwort wenn alles korrekt
+		flash(f'Rezept erfasst', 'success')
+
+	else:
+		#Antwort wenn der Name bereits vorhanden ist. Name funktioniert als unique ID, eigentlich nicht so clever aber muss jetzt herhalten
+		flash(f'Dieser Name existiert für dieses Rezept bereits', 'warning')
+>>>>>>> 0f322b4a53701843c6a80e713f8765298f468b9e
 
 def neuer_wochentag_ablegen(user_id, rez_name, tag):
 	userid_pruef = wochentage.find_one({"_id": user_id})
-	if userid_pruef == None:
+	while userid_pruef == None:
 		tag_erfassen = {
 			"_id": user_id,
-			tag: rez_name 
+			"Montag": "",
+			"Dienstag": "",
+			"Mittwoch": "",
+			"Donnerstag": "",
+			"Freitag": "",
+			"Samstag": "",
+			"Sonntag": ""
 			}
 		go = wochentage.insert_one(tag_erfassen)
-
+		break
 	else:
 		find_day = wochentage.find_one({"_id": user_id})
 		if tag in find_day:
@@ -45,13 +61,17 @@ def neuer_wochentag_ablegen(user_id, rez_name, tag):
 					else:
 						val = val + "," + rez_name
 						go = wochentage.update_one({"_id": user_id}, {"$set": {tag:val}})
-						flash(f'Wurde für ' + tag + ' eingetragen.', 'success')
+						flash(f'Wurde für ' + tag + ' unter Wochenplanung eingetragen.', 'success')
 		else:
 			#update die favoriten
 			go = wochentage.update_one({"_id": user_id}, {"$set": {tag:rez_name}})
 			flash(f'Wurde für ' + tag + ' eingetragen.', 'success')
 
+<<<<<<< HEAD
 #suchen der rezepte
+=======
+#Rezept Abfragen. Eine Funktion für alle Abfragen, steuerbar durch die Var "db"
+>>>>>>> 0f322b4a53701843c6a80e713f8765298f468b9e
 def neues_rezept_abfragen(rezept_name, db):
 	if "wochensicht" == db:
 		rezept_load = wochentage.find(rezept_name)
@@ -60,7 +80,11 @@ def neues_rezept_abfragen(rezept_name, db):
 		rezept_load = collection.find(rezept_name)
 		return rezept_load
 
+<<<<<<< HEAD
 #update rezepte pro tag in wochenübersicht, rez x hinzu oder rez x raus
+=======
+#Wenn Verknüpfungen upgedatet werden wie Verbindungen zwischen den User und der Wochenplanung
+>>>>>>> 0f322b4a53701843c6a80e713f8765298f468b9e
 def rezept_verknüpfung_update(user_id, bid, name):
 	find = collection.find_one({"name":name})
 	do = []
