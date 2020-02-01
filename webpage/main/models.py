@@ -1,12 +1,15 @@
+#import aller pakete
 from datetime import datetime
 from flask import flash
 from main import db, login_manager, collection, wochentage
 from flask_login import UserMixin
+#import fertig
 
 @login_manager.user_loader
 def load_user(user_id):
 	return benutzer_k.query.get(int(user_id))
 
+#funktion um ein neues rezept abzuspeichern
 def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
 	rl_pruef = collection.find_one({"name": R_name})
 	if rl_pruef == None:
@@ -20,6 +23,7 @@ def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
 			}
 
 		go = collection.insert_one(online_rezepts)
+		#warning wird nur ausgegeben wernn dieses ablegen des rezept auch ausgeführt wurde
 	flash(f'Dieser Name existiert für dieses Rezept bereits', 'warning')
 
 def neuer_wochentag_ablegen(user_id, rez_name, tag):
@@ -43,10 +47,11 @@ def neuer_wochentag_ablegen(user_id, rez_name, tag):
 						go = wochentage.update_one({"_id": user_id}, {"$set": {tag:val}})
 						flash(f'Wurde für ' + tag + ' eingetragen.', 'success')
 		else:
+			#update die favoriten
 			go = wochentage.update_one({"_id": user_id}, {"$set": {tag:rez_name}})
 			flash(f'Wurde für ' + tag + ' eingetragen.', 'success')
 
-
+#suchen der rezepte
 def neues_rezept_abfragen(rezept_name, db):
 	if "wochensicht" == db:
 		rezept_load = wochentage.find(rezept_name)
@@ -55,7 +60,7 @@ def neues_rezept_abfragen(rezept_name, db):
 		rezept_load = collection.find(rezept_name)
 		return rezept_load
 
-
+#update rezepte pro tag in wochenübersicht, rez x hinzu oder rez x raus
 def rezept_verknüpfung_update(user_id, bid, name):
 	find = collection.find_one({"name":name})
 	do = []

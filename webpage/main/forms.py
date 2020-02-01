@@ -1,10 +1,12 @@
+#import aller pakete
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, PasswordField, BooleanField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_wtf.file import FileField, FileAllowed
 from main.models import benutzer_k
+#import fertig
 
-#Hier kommen Klassen für Formulare
+#Alle Klassen für Formulare
 class RegistrationForm(FlaskForm):
 	username = StringField('Username', 
 		validators=[DataRequired(), Length(min=2, max=20)])

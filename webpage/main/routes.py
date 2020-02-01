@@ -1,3 +1,4 @@
+#import aller pakete
 from flask import render_template, url_for, flash, redirect, request, jsonify, make_response, session, Markup
 from flask_login import login_user, current_user, logout_user, login_required
 from main import app, db, bcrypt, daten
@@ -6,16 +7,20 @@ from main.models import benutzer_k, aufgaben, load_user, neues_rezept_ablegen, n
 from datetime import datetime
 import main.daten
 import json
+#import fertig
 
+#home
 @app.route("/")
 def index():
 
 	return render_template("index.html")
 
+#übersicht
 @app.route("/uebersicht")
 def uebersicht():
 	return render_template("uebersicht.html")
 
+#registrieren
 @app.route("/registrieren", methods=['GET', "POST"])
 def registrieren():
 	if current_user.is_authenticated:
@@ -30,6 +35,7 @@ def registrieren():
 		return redirect(url_for('login'))
 	return render_template("registrieren.html", title="Registrieren", form=form)
 
+#login
 @app.route("/login", methods=['GET', "POST"])
 def login():
 	if current_user.is_authenticated:
@@ -46,12 +52,14 @@ def login():
 			flash(f'Überprüfe E-Mail und Password.', "danger")
 	return render_template("login.html", title="Login", form=form)
 
+#logout
 @app.route("/logout")
 def logout():
 	logout_user()
 	flash(f'Ausgeloggt!', 'success')
 	return redirect(url_for('index'))
 
+#alle rezepte
 @app.route("/rezepte")
 @login_required
 def rezepte():
@@ -68,6 +76,7 @@ def rezepte():
 
 	return render_template("rezepte.html", title="Rezepte", this=this, rl=rl, user_id=user_id)
 
+#dieser prozess wird aus javascript aktiviert
 @app.route('/background_process/<name>', methods=['GET', 'POST'])
 def background_process(name=False):
 
@@ -77,6 +86,7 @@ def background_process(name=False):
 	b_name = name[2]
 	u_rl = rezept_verknüpfung_update(u_id,b_id,b_name)
 
+#favoriten
 @app.route("/favoriten")
 @login_required
 def favoriten():
@@ -94,6 +104,7 @@ def favoriten():
 
 	return render_template("rezept_favoriten.html", title="Rezepte", form=form, rl=rl, user_id=user_id)
 
+#wochenübersicht
 @app.route("/wochensicht")
 @login_required
 def wochensicht():
@@ -140,6 +151,7 @@ def wochensicht():
 	print(rez_tag_dict)				
 	return render_template("uebersicht.html", title="Wochenübersicht", rez_tag_dict=rez_tag_dict)
 
+#prozess wird aus javascript/jinia aktiviert
 @app.route('/background_weekplan/<name>')
 def background_weekplan(name=False):
 
@@ -152,6 +164,7 @@ def background_weekplan(name=False):
 
 	return redirect(url_for('favoriten'))
 
+#rezept speichern
 @app.route("/rezepte/rezepte_speichern", methods=["GET", "POST"])
 @login_required
 def rezepte_speichern():
