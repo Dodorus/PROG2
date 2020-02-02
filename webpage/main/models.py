@@ -33,6 +33,7 @@ def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
 		#flash('Rezept erfasst', 'success')
 
 	else:
+		print("flash nachricht raus")
 		#Antwort wenn der Name bereits vorhanden ist. Name funktioniert als unique ID, eigentlich nicht so clever aber muss jetzt herhalten
 		#flash('Dieser Name existiert für dieses Rezept bereits', 'warning')
 
@@ -57,6 +58,7 @@ def neuer_wochentag_ablegen(user_id, rez_name, tag):
 			for key,val in find_day.items():
 				if key == tag:
 					if rez_name in val:
+						print("flash nachricht raus")
 						#flash('Dieses Rezept ist bereits für den ' + tag + ' notiert.', 'warning')
 					else:
 						val = val + "," + rez_name
