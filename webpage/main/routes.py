@@ -51,6 +51,7 @@ def login():
 			#flash('Eingeloggt!', 'success')
 			return redirect(next_page) if next_page else redirect(url_for('index'))
 		else:
+			print("flash nachricht raus")
 			#flash('Überprüfe E-Mail und Password.', "danger")
 	return render_template("login.html", title="Login", form=form)
 
