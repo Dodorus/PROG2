@@ -1,11 +1,11 @@
 #import aller pakete
 from datetime import datetime
 from main import app
-import secrets
 import os
 from PIL import Image
 import wtforms_json
 import json
+from os import urandom
 #import fertig
 
 #funktion um daten aus dem json zu laden, wird ab Version 2 des Apps nicht mehr genutzt, da Mongo DB verwendet wird
@@ -41,7 +41,7 @@ def save_json(json_path, user_data):
 
 #funktion im bilder beim upload zu speichern
 def save_pictures(from_picture):
-	random = secrets.token_hex(8)
+	random = urandom(8).hex()
 	_, b_ext = os.path.splitext(from_picture.filename)
 	picture_fn = random + b_ext
 	picture_path = os.path.join(app.root_path, 'static/img/rzp_images', picture_fn)
