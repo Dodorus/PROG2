@@ -25,10 +25,9 @@ def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
 			}
 
 		go = collection.insert_one(online_rezepts)
-<<<<<<< HEAD
+
 		#warning wird nur ausgegeben wernn dieses ablegen des rezept auch ausgeführt wurde
 	flash('Dieser Name existiert für dieses Rezept bereits', 'warning')
-=======
 
 		#Antwort wenn alles korrekt
 		flash('Rezept erfasst', 'success')
@@ -36,7 +35,6 @@ def neues_rezept_ablegen(key, R_name, pic, list_zut, pers):
 	else:
 		#Antwort wenn der Name bereits vorhanden ist. Name funktioniert als unique ID, eigentlich nicht so clever aber muss jetzt herhalten
 		flash('Dieser Name existiert für dieses Rezept bereits', 'warning')
->>>>>>> 0f322b4a53701843c6a80e713f8765298f468b9e
 
 def neuer_wochentag_ablegen(user_id, rez_name, tag):
 	userid_pruef = wochentage.find_one({"_id": user_id})
@@ -69,11 +67,8 @@ def neuer_wochentag_ablegen(user_id, rez_name, tag):
 			go = wochentage.update_one({"_id": user_id}, {"$set": {tag:rez_name}})
 			flash('Wurde für ' + tag + ' eingetragen.', 'success')
 
-<<<<<<< HEAD
 #suchen der rezepte
-=======
 #Rezept Abfragen. Eine Funktion für alle Abfragen, steuerbar durch die Var "db"
->>>>>>> 0f322b4a53701843c6a80e713f8765298f468b9e
 def neues_rezept_abfragen(rezept_name, db):
 	if "wochensicht" == db:
 		rezept_load = wochentage.find(rezept_name)
@@ -82,11 +77,8 @@ def neues_rezept_abfragen(rezept_name, db):
 		rezept_load = collection.find(rezept_name)
 		return rezept_load
 
-<<<<<<< HEAD
 #update rezepte pro tag in wochenübersicht, rez x hinzu oder rez x raus
-=======
 #Wenn Verknüpfungen upgedatet werden wie Verbindungen zwischen den User und der Wochenplanung
->>>>>>> 0f322b4a53701843c6a80e713f8765298f468b9e
 def rezept_verknuepfung_update(user_id, bid, name):
 	find = collection.find_one({"name":name})
 	do = []
