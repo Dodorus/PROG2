@@ -3,7 +3,7 @@
 #import aller pakete
 from datetime import datetime
 from flask import flash
-from main import db, login_manager, collection, wochentage
+from main import db, login_manager, collection, wochentage, weights
 from flask_login import UserMixin
 #import fertig
 
@@ -131,4 +131,10 @@ class aufgaben(db.Model):
 		return f"aufgaben('{self.titel}', '{self.erfassungsDate}'"
 
 
-
+def neuer_wert_ablegen(wert, key):
+	tag_erfassen = {
+			"user_id": "1",
+			"wert": wert,
+			"timestamp": str(key)
+			}
+	go = weights.insert_one(tag_erfassen)

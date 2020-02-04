@@ -25,5 +25,6 @@ mongo = MongoClient("mongodb+srv://dodorus:dom195kun@cluster0-3vwwc.mongodb.net/
 dbmongo = mongo["rezeptbay"]
 collection = dbmongo["rezepte"]
 wochentage = dbmongo["wochentage"]
+weights = dbmongo["weights"]
 
 from main import routes

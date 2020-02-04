@@ -5,7 +5,7 @@ from flask import render_template, url_for, flash, redirect, request, jsonify, m
 from flask_login import login_user, current_user, logout_user, login_required
 from main import app, db, bcrypt, daten
 from main.forms import RegistrationForm, LoginForm, RezeptErfassen, AnzPersonenForm
-from main.models import benutzer_k, aufgaben, load_user, neues_rezept_ablegen, neues_rezept_abfragen, rezept_verknuepfung_update, neuer_wochentag_ablegen
+from main.models import benutzer_k, aufgaben, load_user, neuer_wert_ablegen, neues_rezept_ablegen, neues_rezept_abfragen, rezept_verknuepfung_update, neuer_wochentag_ablegen
 from datetime import datetime
 import main.daten
 import json
@@ -229,3 +229,10 @@ def rezepte_speichern():
 		
 
 	return render_template("rezepte_speichern.html", title="Rezepte erfassen", form=form)
+
+#daten speichern
+@app.route('/daten_speichern/<name>')
+def daten_speichern(name=False):
+	key = datetime.now()
+	neuer_wert_ablegen(name, key)
+	return redirect(url_for('favoriten'))
